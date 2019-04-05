@@ -10,7 +10,6 @@ public class CountdownTimer : MonoBehaviour
 
 	float CurrentMainTime = 0f;
 	[SerializeField] float StartingMainTime = 10f;
-
 	
 	float CurrentSupportTime = 0f;
 	[SerializeField] float StartingSupportTime = 10f;
@@ -25,6 +24,7 @@ public class CountdownTimer : MonoBehaviour
     {
 		CurrentMainTime = StartingMainTime;
 		CurrentSupportTime = StartingSupportTime;
+		
     }
 
     // Update is called once per frame
