@@ -3,10 +3,26 @@
   <component name="ContentModelStore">
     <e p="C:\Users\janek\.Rider2018.2\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\janek\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_RiskOfNoRain.-1932395386.00" t="ExcludeRecursive" />
-    <e p="D:\Git\RiskOfNoRain" t="IncludeFlat">
+    <e p="D:\Git\RiskOfNoRain" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Materials" t="Include">
+          <e p="brick.shader" t="Include" />
+          <e p="sky.shader" t="Include" />
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="Hook.cs" t="Include" />
+          <e p="InputManager.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+        </e>
+      </e>
       <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
       <e p="RiskOfNoRain.sln" t="IncludeFlat" />
-      <e p="Temp" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
     </e>
   </component>
 </project>
