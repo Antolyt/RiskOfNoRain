@@ -17,7 +17,7 @@ public class Hook : MonoBehaviour
     public HookState hookState = HookState.stored;
     public float maxDistance = 10;
     public float hookCollectRange;
-    public MeshRenderer renderer;
+    public MeshRenderer meshRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -76,7 +76,7 @@ public class Hook : MonoBehaviour
         if (direction != Vector3.zero)
         {
             this.direction = direction;
-            renderer.enabled = true;
+            meshRenderer.enabled = true;
             hookState = HookState.fired;
         }
     }
@@ -84,7 +84,7 @@ public class Hook : MonoBehaviour
     public void StoreHook()
     {
         hookState = HookState.stored;
-        renderer.enabled = false;
+        meshRenderer.enabled = false;
     }
 
     public void ReturnHook()

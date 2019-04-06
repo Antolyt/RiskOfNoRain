@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBody : MonoBehaviour
 {
     Dictionary<int, GameObject> conntectedEnvironment;
+    public Animator animator;
 
     private void Awake()
     {
@@ -20,7 +21,20 @@ public class PlayerBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float xVel = this.GetComponent<Rigidbody2D>().velocity.x;
+        if (xVel > 0.1f)
+        {
+            this.transform.rotation = Quaternion.LookRotation(Vector3.forward);
+        }
+        if (xVel < -0.1f)
+        {
+            this.transform.rotation = Quaternion.LookRotation(Vector3.back);
+        }
+
+        if (IsGrounded())
+            animator.SetFloat("speed", Mathf.Abs(xVel));
+        else
+            animator.SetFloat("speed", 0);
     }
 
     public bool IsGrounded()
@@ -42,5 +56,10 @@ public class PlayerBody : MonoBehaviour
         {
             conntectedEnvironment.Remove(collision.gameObject.GetInstanceID());
         }
+    }
+
+    public void ClearConnections()
+    {
+        conntectedEnvironment.Clear();
     }
 }
