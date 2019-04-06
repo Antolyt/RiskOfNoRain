@@ -1,16 +1,14 @@
 fileFormatVersion: 2
-guid: 9ecce28575fa0694a822a7c89deef0bf
+guid: c5acbe43d181fab4b8d754f7e47388ca
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: unnamed
-    2100002: stone
-    2100004: Material_001
+    2100000: Material_001
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder
+    4300000: Plane
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
@@ -18,12 +16,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material_001
-    second: {fileID: 2100000, guid: b6426d1ea280ca349aea7837432e8118, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: stone
-    second: {fileID: 2100000, guid: 5e3759fbb0aa76540b4f0be4f18c92a5, type: 2}
+    second: {fileID: 2100000, guid: 01eb0e413e056dc4ca385c0ebf3354d2, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

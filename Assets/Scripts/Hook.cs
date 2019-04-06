@@ -18,6 +18,7 @@ public class Hook : MonoBehaviour
     public float maxDistance = 10;
     public float hookCollectRange;
     public MeshRenderer meshRenderer;
+    public DistanceJoint2D joint;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,8 @@ public class Hook : MonoBehaviour
     {
         Vector3 position = this.transform.position;
 
+        joint.enabled = hookState == HookState.hooked;
+        
         if(hookState == HookState.fired)
         {
             float distance = Vector3.Distance(playerBody.transform.position, transform.position);
@@ -58,6 +61,10 @@ public class Hook : MonoBehaviour
         {
             Vector3 playerPosition = playerBody.transform.position;
             this.transform.position = playerPosition;
+        }
+
+        if (hookState == HookState.hooked) {
+            joint.distance -= Time.deltaTime;
         }
     }
 
