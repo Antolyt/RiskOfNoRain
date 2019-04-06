@@ -35,25 +35,28 @@ public class InputManager : MonoBehaviour
     {
         float speed = stats.CurrentSpeed;
 
+        if (Input.GetButtonDown("Attack"))
+        {
+            playerBody.Attack();
+        }
+
         if(input.InputButtonDown(EInputButtons.A, inputID))
         {
             if(hook.hookState == HookState.hooked)
             {
-                rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0);
-                rigidbody.AddForce((hook.transform.position - rigidbody.transform.position).normalized * pullForce);
-                rigidbody.AddForce(Vector3.up * jumpForce);
+                playerBody.rig.velocity = new Vector3(playerBody.rig.velocity.x, 0);
+                playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
                 hook.hookState = HookState.returning;
-                playerBody.ClearConnections();
             }
 
             if(playerBody.IsGrounded())
             {
-                rigidbody.AddForce(Vector3.up * jumpForce);
+                playerBody.rig.AddForce(Vector3.up * jumpForce);
             }
         }
 
-        Vector3 position = rigidbody.transform.position;
-        float xVel = rigidbody.velocity.x;
+        Vector3 position = playerBody.rig.transform.position;
+        float xVel = playerBody.rig.velocity.x;
 
         if(!playerBody.IsGrounded())
         {
@@ -72,7 +75,7 @@ public class InputManager : MonoBehaviour
             xVel = input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed;
         }
 
-        rigidbody.velocity = new Vector3(xVel, rigidbody.velocity.y);
+        playerBody.rig.velocity = new Vector3(xVel, playerBody.rig.velocity.y);
 
         if(input.InputButtonDown(EInputButtons.LB, inputID))
         {

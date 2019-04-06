@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PlayerBody : MonoBehaviour
 {
-    Dictionary<int, GameObject> conntectedEnvironment;
     public Animator animator;
-
-    private void Awake()
-    {
-        conntectedEnvironment = new Dictionary<int, GameObject>();
-    }
+    public Rigidbody2D rig;
+    public Transform playerSpawner;
+    public ParticleSystem ps;
+    public float maxDistanceToGroundForJump;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -35,31 +35,24 @@ public class PlayerBody : MonoBehaviour
             animator.SetFloat("speed", Mathf.Abs(xVel));
         else
             animator.SetFloat("speed", 0);
+
+        if(transform.position.y < -10)
+        {
+            transform.position = playerSpawner.position;
+            rig.velocity = Vector3.zero;
+        }
     }
 
     public bool IsGrounded()
     {
-        return conntectedEnvironment.Count > 0;
+        //return conntectedEnvironment.Count > 0;
+        RaycastHit2D rc = Physics2D.Raycast(this.transform.position, Vector3.down, maxDistanceToGroundForJump, LayerMask.GetMask("Environment"));
+        return rc.transform != null;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void Attack()
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
-        {
-            conntectedEnvironment.Add(collision.gameObject.GetInstanceID(), collision.gameObject);
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
-        {
-            conntectedEnvironment.Remove(collision.gameObject.GetInstanceID());
-        }
-    }
-
-    public void ClearConnections()
-    {
-        conntectedEnvironment.Clear();
+        animator.SetBool("attacking", true);
+        ps.Play();
     }
 }
