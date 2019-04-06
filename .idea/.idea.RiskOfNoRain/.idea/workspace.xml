@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1d1352eb-993c-42c8-ae90-f03b4cb6d699" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RiskOfNoRain/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RiskOfNoRain/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RiskOfNoRain/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RiskOfNoRain/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/sky.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/sky.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Hook.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Hook.unity.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/sniper.blend" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/sniper.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/sniper.blend.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/sniper.blend.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/sniper.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/sniper.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/graphics test scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/graphics test scene.unity" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,21 +24,25 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="cs" value="100" />
           <entry key="shader" value="406" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+          <entry key="C#" value="100" />
           <entry key="ShaderLab" value="406" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="cs" value="2" />
           <entry key="shader" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="C#" value="2" />
           <entry key="ShaderLab" value="1" />
         </counts>
       </usages-collector>
@@ -55,7 +59,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Materials/sky.shader">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="178">
@@ -70,13 +74,44 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Util/DieInTime.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+              <folding>
+                <marker date="1554552453045" expanded="false" signature="6:78" ph="..." />
+                <marker date="1554552453045" expanded="true" signature="119:215" ph="{...}" />
+                <marker date="1554552453045" expanded="true" signature="166:212" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Util/Billboard.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+              <folding>
+                <marker date="1554552532917" expanded="false" signature="6:78" ph="..." />
+                <marker date="1554552532917" expanded="true" signature="119:378" ph="{...}" />
+                <marker date="1554552532917" expanded="true" signature="190:203" ph="{...}" />
+                <marker date="1554552532917" expanded="true" signature="262:376" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Util/DieInTime.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Materials/sky.shader" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Util/Billboard.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Materials/brick.shader" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -84,6 +119,8 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Materials/brick.shader" />
         <option value="$PROJECT_DIR$/Assets/Materials/sky.shader" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Util/DieInTime.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Util/Billboard.cs" />
       </list>
     </option>
   </component>
@@ -159,12 +196,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1554488104072</updated>
-      <workItem from="1554488111008" duration="5238000" />
+      <workItem from="1554488111008" duration="5943000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5238000" />
+    <option name="totallyTimeSpent" value="5943000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -176,7 +213,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1721" height="935" extended-state="7" />
+    <frame x="-7" y="-7" width="1721" height="935" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
@@ -240,6 +277,31 @@
             <marker date="1554500478882" expanded="true" signature="139:236" ph="{...}" />
             <marker date="1554500478882" expanded="true" signature="255:1867" ph="{...}" />
             <marker date="1554500478882" expanded="true" signature="330:1856" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Util/DieInTime.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+          <folding>
+            <marker date="1554552453045" expanded="false" signature="6:78" ph="..." />
+            <marker date="1554552453045" expanded="true" signature="119:215" ph="{...}" />
+            <marker date="1554552453045" expanded="true" signature="166:212" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Util/Billboard.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+          <folding>
+            <marker date="1554552532917" expanded="false" signature="6:78" ph="..." />
+            <marker date="1554552532917" expanded="true" signature="119:378" ph="{...}" />
+            <marker date="1554552532917" expanded="true" signature="190:203" ph="{...}" />
+            <marker date="1554552532917" expanded="true" signature="262:376" ph="{...}" />
           </folding>
         </state>
       </provider>

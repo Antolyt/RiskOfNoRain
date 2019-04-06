@@ -31,6 +31,10 @@
             <e p="PickupList.cs" t="Include" />
             <e p="unImportantStuff.cs" t="Include" />
           </e>
+          <e p="Util" t="Include">
+            <e p="Billboard.cs" t="Include" />
+            <e p="DieInTime.cs" t="Include" />
+          </e>
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />
