@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e709ef7d4d39d49a967d52fb2e1cdb, type: 3}
+  m_Name: InputCreator
+  m_EditorClassIdentifier: 
+  _numJoysticks: 8
+  _ignoreCount: 0
+  _axisGravity: 0
+  _axisDead: 0.19
+  _axisSensitivity: 1
+  _invertY: 0
+  _invertX: 0
+  _moveAxisXName: move_x
+  _moveAxisYName: move_y
+  _viewAxisXName: view_x
+  _viewAxisYName: view_y
+  _leftTriggerName: left_button
+  _rightTriggerName: right_button
+  _buttonAxisGravity: 1000
+  _buttonAxisDead: 0.001
+  _buttonAxisSensitivity: 1000
+  _buttonNames:
+  - a
+  - b
+  - x
+  - y
+  - left_bumper
+  - right_bumper
+  _p0KeyboardButtons:
+  - W
+  - Q
+  - E
+  - A
+  - S
+  - D
+  _p0KeyHorizontalPos: 
+  _p0KeyHorizontalNeg: 
+  _p0KeyVerticalPos: 
+  _p0KeyVerticalNeg: 
+  _p1KeyboardButtons:
+  - I
+  - O
+  - P
+  - K
+  - L
+  - "\xD6"
+  _p1KeyHorizontalPos: 
+  _p1KeyHorizontalNeg: 
+  _p1KeyVerticalPos: 
+  _p1KeyVerticalNeg: 

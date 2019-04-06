@@ -67,6 +67,11 @@ public class PlayerStats : MonoBehaviour
         buffManager.ApplyAllBuffs(this);
     }
 
+    void Update()
+    {
+        StatUpdate();    
+    }
+
     public float CurrentSpeed
     {
         get { return currentSpeed; }

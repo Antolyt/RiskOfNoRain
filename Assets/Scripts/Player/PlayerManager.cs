@@ -26,6 +26,6 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     void PlayerUpdate()
     {
-        input.PlayerUpdate(stats);
+        //.PlayerUpdate(stats);
     }
 }

@@ -17,19 +17,25 @@ public class InputManager : MonoBehaviour
     public Hook hook;
     public PlayerBody playerBody;
 
-    // Start is called before the first frame update
+    [SerializeField]
+    int inputID;
+
+    [SerializeField]
+    InputRequester input;
+    PlayerStats stats;
+
+    // Start is called before the first frame updatMOV
     void Start()
     {
-        
+        stats = GetComponent<PlayerStats>();
     }
 
     // PlayerUpdate needs to be called by Playermanager to fix Execution order!
-    public void PlayerUpdate(PlayerStats stats)
+    public void Update()
     {
         float speed = stats.CurrentSpeed;
 
-
-        if(Input.GetButtonDown("Jump"))
+        if(input.InputButtonDown(EInputButtons.A, inputID))
         {
             if(hook.hookState == HookState.hooked)
             {
@@ -59,16 +65,16 @@ public class InputManager : MonoBehaviour
             {
                 xVel += friction * Time.deltaTime;
             }
-            xVel += Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+            xVel += input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed * Time.deltaTime;
         }
         else
         {
-            xVel = Input.GetAxis("Horizontal") * speed;
+            xVel = input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed;
         }
 
         rigidbody.velocity = new Vector3(xVel, rigidbody.velocity.y);
 
-        if(Input.GetButtonDown("Hook"))
+        if(input.InputButtonDown(EInputButtons.LB, inputID))
         {
             if(hook.hookState == HookState.hooked)
             {
@@ -77,7 +83,8 @@ public class InputManager : MonoBehaviour
 
             if (hook.hookState == HookState.stored)
             {
-                hook.ShootHook((new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))).normalized);
+                hook.ShootHook((new Vector3(input.InputAxis(EInputAxis.movementHorizontal, inputID), input.InputAxis(EInputAxis.movementVertical, inputID))).normalized);
+                // hook.ShootHook((new Vector3(Input.GetAxis("move_x_" + inputID), Input.GetAxis("move_x_" + inputID))).normalized);
             }
         }
     }

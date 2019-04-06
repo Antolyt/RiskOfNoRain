@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3895884817657276302}
   - component: {fileID: 3895884817657276303}
+  - component: {fileID: 7504595616775964432}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,8 +45,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupSpawnTime: 10
+  spawner: {fileID: 0}
   pickupList:
   - {fileID: 5145447401649184501, guid: 6349a96c4351d5d49bf912bc43b9c864, type: 3}
   - {fileID: 5145447401649184501, guid: d8acc225a9983b8428965261bddeb757, type: 3}
   - {fileID: 5145447401649184501, guid: cb5e95eea54da444e9a5eed1e6c35543, type: 3}
-  spawnLocations: []
+--- !u!114 &7504595616775964432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3895884817657276288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e7d14d7701c5c46add565488aa28f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dualInput: 1
