@@ -4772,7 +4772,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 9161077922461405464}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 03b582e143ad50f4280052ff459b83a2, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -4795,7 +4795,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 03b582e143ad50f4280052ff459b83a2, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -5115,6 +5115,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.243798
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 50e3dea9ada0eaa43af1cda9ae5c4ae2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a5936de9f80f35843b5165110cd4df63, type: 2}
     - target: {fileID: 400002, guid: 50e3dea9ada0eaa43af1cda9ae5c4ae2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 78.13577
@@ -5387,10 +5391,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.2946806e-21
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 50e3dea9ada0eaa43af1cda9ae5c4ae2, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: a5936de9f80f35843b5165110cd4df63, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50e3dea9ada0eaa43af1cda9ae5c4ae2, type: 3}
 --- !u!4 &6026773316788274336 stripped
