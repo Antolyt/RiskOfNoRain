@@ -16,6 +16,8 @@ public class Hook : MonoBehaviour
     public float speed = 1;
     public HookState hookState = HookState.stored;
     public float maxDistance = 10;
+    public float hookCollectRange;
+    public MeshRenderer renderer;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,11 @@ public class Hook : MonoBehaviour
         if(hookState == HookState.returning)
         {
             direction = (playerBody.transform.position - transform.position).normalized;
+
+            if(Vector3.Distance(this.transform.position, playerBody.transform.position) < hookCollectRange)
+            {
+                StoreHook();
+            }
         }
 
         if (hookState == HookState.fired || hookState == HookState.returning)
@@ -60,7 +67,28 @@ public class Hook : MonoBehaviour
             hookState = HookState.hooked;
         if(hookState == HookState.returning && other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            hookState = HookState.stored;
+            StoreHook();
         }
+    }
+
+    public void ShootHook(Vector3 direction)
+    {
+        if (direction != Vector3.zero)
+        {
+            this.direction = direction;
+            renderer.enabled = true;
+            hookState = HookState.fired;
+        }
+    }
+
+    public void StoreHook()
+    {
+        hookState = HookState.stored;
+        renderer.enabled = false;
+    }
+
+    public void ReturnHook()
+    {
+        hookState = HookState.returning;
     }
 }

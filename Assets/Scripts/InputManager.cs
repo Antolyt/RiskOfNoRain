@@ -12,8 +12,10 @@ public class InputManager : MonoBehaviour
     public Rigidbody2D rigidbody;
     public float jumpForce = 1;
     public float pullForce = 1;
+    public float friction = 1;
  
     public Hook hook;
+    public PlayerBody playerBody;
 
     // Start is called before the first frame update
     void Start()
@@ -26,45 +28,59 @@ public class InputManager : MonoBehaviour
     {
         float speed = stats.CurrentSpeed;
 
-        foreach (var item in inputs)
-        {
-            if(Input.GetButtonDown(item)) {
-                Debug.Log(item);
-            }
-        }
 
         if(Input.GetButtonDown("Jump"))
         {
-            rigidbody.AddForce(Vector3.up * jumpForce);
             if(hook.hookState == HookState.hooked)
             {
+                rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0);
                 rigidbody.AddForce((hook.transform.position - rigidbody.transform.position).normalized * pullForce);
                 hook.hookState = HookState.returning;
+            }
+
+            if(playerBody.IsGrounded())
+            {
+                rigidbody.AddForce(Vector3.up * jumpForce);
             }
         }
 
         Vector3 position = rigidbody.transform.position;
         float xVel = rigidbody.velocity.x;
 
-        if(Input.GetAxis("Horizontal") > 0)
+        if (xVel > speed)
         {
-            if (xVel < 0)
-            {
-                xVel = Mathf.Max(xVel + Input.GetAxis("Horizontal") * speed, xVel);
-            }
-            else
-                xVel = Mathf.Max(Input.GetAxis("Horizontal") * speed, xVel);
+            xVel -= friction * Time.deltaTime;
+            xVel += Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        }
+        else if (xVel < -speed)
+        {
+            xVel += friction * Time.deltaTime;
+            xVel += Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        }
+        else
+        {
+            xVel = Input.GetAxis("Horizontal") * speed;
         }
 
-        if (Input.GetAxis("Horizontal") < 0)
-        {
-            if (xVel > 0)
-            {
-                xVel = Mathf.Min(xVel + Input.GetAxis("Horizontal") * speed, xVel);
-            }
-            else
-                xVel = Mathf.Min(Input.GetAxis("Horizontal") * speed, xVel);
-        }
+        //if(Input.GetAxis("Horizontal") > 0)
+        //{
+        //    if (xVel < -Input.GetAxis("Horizontal"))
+        //    {
+        //        xVel = xVel + Input.GetAxis("Horizontal") * speed;
+        //    }
+        //    else
+        //        xVel = Mathf.Max(Input.GetAxis("Horizontal") * speed, xVel);
+        //}
+
+        //if (Input.GetAxis("Horizontal") < 0)
+        //{
+        //    if (xVel > -Input.GetAxis("Horizontal"))
+        //    {
+        //        xVel = xVel + Input.GetAxis("Horizontal") * speed;
+        //    }
+        //    else
+        //        xVel = Mathf.Min(Input.GetAxis("Horizontal") * speed, xVel);
+        //}
 
         rigidbody.velocity = new Vector3(xVel, rigidbody.velocity.y);
 
@@ -72,26 +88,14 @@ public class InputManager : MonoBehaviour
         {
             if(hook.hookState == HookState.hooked)
             {
-                ReturnHook();
+                hook.ReturnHook();
             }
 
             if (hook.hookState == HookState.stored)
             {
-                ShootHook();
+                hook.ShootHook((new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))).normalized);
             }
                 
         }
-    }
-
-    public void ShootHook()
-    {
-        hook.direction = (new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))).normalized;
-        if(hook.direction != Vector3.zero)
-            hook.hookState = HookState.fired;
-    }
-    
-    public void ReturnHook()
-    {
-        hook.hookState = HookState.returning;
     }
 }
