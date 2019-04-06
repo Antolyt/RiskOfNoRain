@@ -11,7 +11,6 @@ public class PickupManager : MonoBehaviour
     [SerializeField]
     List<Pickup> pickupList;
 
-    [SerializeField]
     List<PickupSpawner> spawnLocations;
 
     // Start is called before the first frame update
