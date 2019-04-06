@@ -75,6 +75,7 @@ public class Hook : MonoBehaviour
     {
         if (direction != Vector3.zero)
         {
+            this.transform.rotation = Quaternion.LookRotation(direction);
             this.direction = direction;
             meshRenderer.enabled = true;
             hookState = HookState.fired;
