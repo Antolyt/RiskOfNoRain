@@ -18,10 +18,10 @@ public class InputManager : MonoBehaviour
     public PlayerBody playerBody;
 
     [SerializeField]
-    int inputID;
+    public int inputID;
 
-    [SerializeField]
-    InputRequester input;
+    [HideInInspector]
+    public InputRequester inputRequester;
     Player.PlayerStats stats;
 
     // Start is called before the first frame updatMOV
@@ -35,12 +35,14 @@ public class InputManager : MonoBehaviour
     {
         float speed = stats.CurrentSpeed;
 
-        if (input.InputButtonDown(EInputButtons.RB, inputID));
+        Debug.Log(inputRequester == null );
+
+        if (inputRequester.InputButtonDown(EInputButtons.RB, inputID))
         {
             playerBody.Attack();
         }
 
-        if(input.InputButtonDown(EInputButtons.A, inputID))
+        if(inputRequester.InputButtonDown(EInputButtons.A, inputID))
         {
             if(hook.hookState == HookState.hooked)
             {
@@ -69,17 +71,17 @@ public class InputManager : MonoBehaviour
             {
                 xVel += friction * Time.deltaTime;
             }*/
-            xVel = Mathf.MoveTowards(xVel, input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed, Time.deltaTime*20);
+            xVel = Mathf.MoveTowards(xVel, inputRequester.InputAxis(EInputAxis.movementHorizontal, inputID) * speed, Time.deltaTime*20);
            // xVel += input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed * Time.fixedDeltaTime;
         }
         else
         {
-            xVel = Mathf.MoveTowards(xVel, input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed, Time.deltaTime * 40);
+            xVel = Mathf.MoveTowards(xVel, inputRequester.InputAxis(EInputAxis.movementHorizontal, inputID) * speed, Time.deltaTime * 40);
         }
 
         playerBody.rig.velocity = new Vector3(xVel, playerBody.rig.velocity.y);
 
-        if(input.InputButtonDown(EInputButtons.LB, inputID))
+        if(inputRequester.InputButtonDown(EInputButtons.LB, inputID))
         {
             if(hook.hookState == HookState.hooked)
             {
@@ -88,7 +90,7 @@ public class InputManager : MonoBehaviour
 
             if (hook.hookState == HookState.stored)
             {
-                hook.ShootHook((new Vector3(input.InputAxis(EInputAxis.movementHorizontal, inputID), -input.InputAxis(EInputAxis.movementVertical, inputID))).normalized);
+                hook.ShootHook((new Vector3(inputRequester.InputAxis(EInputAxis.movementHorizontal, inputID), -inputRequester.InputAxis(EInputAxis.movementVertical, inputID))).normalized);
                 // hook.ShootHook((new Vector3(Input.GetAxis("move_x_" + inputID), Input.GetAxis("move_x_" + inputID))).normalized);
             }
         }

@@ -14,7 +14,9 @@ public class Player : MonoBehaviour
         [SerializeField]
         float attackSpeed;
 
-        public void ApplyBuff(Buff buff)
+        bool swapActive = false;
+
+        public void ApplyBuff(Buff buff, Player player)
         {
             switch (buff.ManipulatedStat)
             {
@@ -27,10 +29,19 @@ public class Player : MonoBehaviour
                 case Buff.Stat.AttackSpeed:
                     CurrentAttackSpeed += buff.ModifierAmount;
                     break;
+                case Buff.Stat.SwapPickup:
+                    swapActive = true;
+
+                    break;
                 default:
                     Debug.LogWarning("Case " + buff.ManipulatedStat.ToString() + " is not implemented yet");
                     break;
             }
+        }
+
+        public void InitiateSwap()
+        {
+            
         }
 
         /// <summary>
@@ -46,6 +57,7 @@ public class Player : MonoBehaviour
             CurrentSpeed = speed;
             CurrentDamage = damage;
             CurrentAttackSpeed = attackSpeed;
+            swapActive = false;
         }
 
         void Update()
@@ -58,6 +70,7 @@ public class Player : MonoBehaviour
         public float CurrentAttackSpeed { get; private set; }
 
         public float CurrentDamage { get; private set; }
+        public int SwapPlayerID { get; set; }
     }
 
     public class BuffManager
@@ -66,25 +79,28 @@ public class Player : MonoBehaviour
         List<Buff> activeBuffs;
         List<Buff> expiredBuffs;
 
+        Player player;
+
         // Start is called before the first frame update
-        public BuffManager()
+        public BuffManager(Player _player)
         {
             activeBuffs = new List<Buff>();
             expiredBuffs = new List<Buff>();
+            player = _player;
         }
 
         public void AddBuff(Buff buff)
         {
             activeBuffs.Add(buff);
-            buff.StartBuff();
+            buff.StartBuff(player);
         }
 
-        public void ApplyAllBuffs(Player.PlayerStats stats)
+        public void ApplyAllBuffs(Player player)
         {
             foreach (Buff buff in activeBuffs)
             {
-                stats.ApplyBuff(buff);
-                // de
+                player.stats.ApplyBuff(buff, player);
+
                 if (buff.BuffUpdate(Time.deltaTime) == 0)
                 {
                     Debug.Log("Destroyed Buff this round");
@@ -94,25 +110,48 @@ public class Player : MonoBehaviour
 
             foreach (Buff buff in expiredBuffs)
             {
+                buff.Endbuff();
                 activeBuffs.Remove(buff);
             }
         }
     }
 
+    
     InputManager input;
     [SerializeField]
     public PlayerStats stats;
-    public BuffManager buffManager; 
+    public BuffManager buffManager;
+
+    private void Awake()
+    {
+        input = GetComponent<InputManager>();
+    }
 
     void Start()
     {
-        buffManager = new BuffManager();
-        input = GetComponent<InputManager>();
+        buffManager = new BuffManager(this);
     }
 
     void Update()
     {
         stats.StatUpdate();
-        buffManager.ApplyAllBuffs(stats);
+        buffManager.ApplyAllBuffs(this);
     }
+
+    public void InitiatePlayer(Team team, int inputID, InputRequester inputRequester)
+    {
+        Team = team;
+        input.inputRequester = inputRequester;
+        input.inputID = inputID;
+
+    }
+
+    public void InitiateSwap()
+    {
+        int otherPlayerID = ( input.inputID == 0 ) ? 1 : 0;
+
+        // stats.SwapPlayerID = 
+    }
+
+    public Team Team { get; private set; }
 }
