@@ -17,16 +17,18 @@ public class BuffManager : MonoBehaviour
     public void AddBuff(Buff buff)
     {
         activeBuffs.Add(buff);
+        buff.StartBuff();
     }
 
     public void ApplyAllBuffs(PlayerStats stats)
     {
         foreach (Buff buff in activeBuffs)
         {
-            buff.ApplyBuff(stats);
+            stats.ApplyBuff(buff);
             // de
             if (buff.BuffUpdate(Time.deltaTime) == 0)
             {
+                Debug.Log("Destroyed Buff this round");
                 expiredBuffs.Add(buff);
             }
         }

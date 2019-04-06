@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Buff", menuName = "Buff")]
 public class Buff : ScriptableObject
 {
-    enum Stat
+    public enum Stat
     {
         Speed,
         Damage,
@@ -20,12 +20,17 @@ public class Buff : ScriptableObject
     float duration;
     float remainingDuration;
 
-    public int BuffUpdate(float time)
+    public void StartBuff()
+    {
+        remainingDuration = duration;
+    }
+
+    public int BuffUpdate(float deltaTime)
     {
         int result = 1;
 
-        remainingDuration -= time;
-        if (remainingDuration < 0)
+        remainingDuration -= deltaTime;
+        if (remainingDuration <= 0)
         {
             result = 0;
         }
@@ -33,22 +38,13 @@ public class Buff : ScriptableObject
         return result;
     }
 
-    public void ApplyBuff(PlayerStats stats)
+    public Stat ManipulatedStat
     {
-        switch (manipulatedStat)
-        {
-            case Stat.Speed:
-                stats.currentSpeed += modifierAmount;
-                break;
-            case Stat.Damage:
-                stats.currentDamage += modifierAmount;
-                break;
-            case Stat.AttackSpeed:
-                stats.currentAttackSpeed += modifierAmount;
-                break;
-            default:
-                Debug.LogWarning("Case " + manipulatedStat.ToString() + " is not implemented yet");
-                break;
-        }
+        get { return manipulatedStat; }
+    }
+
+    public float ModifierAmount
+    {
+        get { return modifierAmount;  }
     }
 }

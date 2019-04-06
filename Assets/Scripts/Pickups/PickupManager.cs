@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PickupManager : MonoBehaviour
@@ -7,6 +8,9 @@ public class PickupManager : MonoBehaviour
     [SerializeField]
     float pickupSpawnTime;
     float pickupSpawnTimer;
+
+    [SerializeField]
+    GameObject spawner;
 
     [SerializeField]
     List<Pickup> pickupList;
@@ -17,6 +21,8 @@ public class PickupManager : MonoBehaviour
     void Start()
     {
         pickupSpawnTimer = pickupSpawnTime;
+
+        spawnLocations = spawner.GetComponentsInChildren<PickupSpawner>().ToList();
     }
 
     // Update is called once per frame
@@ -37,7 +43,7 @@ public class PickupManager : MonoBehaviour
     {
         List<PickupSpawner> freeSpawnLocations = spawnLocations.FindAll(p => p.HasActivePickup == false);
 
-        if (spawnLocations != null)
+        if (freeSpawnLocations != null && freeSpawnLocations.Count >= 1)
         {
             PickupSpawner spawnLocation = freeSpawnLocations[Random.Range(0, freeSpawnLocations.Count)];
 

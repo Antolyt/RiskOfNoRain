@@ -12,8 +12,7 @@ public class InputManager : MonoBehaviour
     public Rigidbody2D rigidbody;
     public float jumpForce = 1;
     public float pullForce = 1;
-    public float speed = 1;
-
+ 
     public Hook hook;
 
     // Start is called before the first frame update
@@ -22,9 +21,11 @@ public class InputManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    // PlayerUpdate needs to be called by Playermanager to fix Execution order!
+    public void PlayerUpdate(PlayerStats stats)
     {
+        float speed = stats.CurrentSpeed;
+
         foreach (var item in inputs)
         {
             if(Input.GetButtonDown(item)) {
