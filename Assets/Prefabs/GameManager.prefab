@@ -43,9 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 323dc4452224c274a818ac51a90eed14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupSpawnTime: 10
+  pickupSpawnTime: 5
+  spawner: {fileID: 0}
   pickupList:
   - {fileID: 5145447401649184501, guid: 6349a96c4351d5d49bf912bc43b9c864, type: 3}
   - {fileID: 5145447401649184501, guid: d8acc225a9983b8428965261bddeb757, type: 3}
   - {fileID: 5145447401649184501, guid: cb5e95eea54da444e9a5eed1e6c35543, type: 3}
-  spawnLocations: []
+  - {fileID: 5145447401649184501, guid: 2c916ffd33d5d7d42b3e2a303592597a, type: 3}
+  - {fileID: 5145447401649184501, guid: 266263ca47e8737468f84a22831032c6, type: 3}
+  - {fileID: 5145447401649184501, guid: 15d63a53ac6d8b841b8b88bebe01a34c, type: 3}

@@ -6,6 +6,8 @@
     <e p="D:\Git\RiskOfNoRain" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="AnimationBehaviours.cs" t="Include" />
+        <e p="Chain.cs" t="Include" />
         <e p="Materials" t="Include">
           <e p="brick.shader" t="Include" />
           <e p="sky.shader" t="Include" />
@@ -33,6 +35,7 @@
           </e>
           <e p="Util" t="Include">
             <e p="Billboard.cs" t="Include" />
+            <e p="CameraFollowMult.cs" t="Include" />
             <e p="DieInTime.cs" t="Include" />
           </e>
         </e>
