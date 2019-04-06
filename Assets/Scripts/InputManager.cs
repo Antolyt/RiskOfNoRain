@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.IO;
@@ -24,6 +25,9 @@ public class InputManager : MonoBehaviour
     public InputRequester inputRequester;
     Player.PlayerStats stats;
 
+    private Vector2 aim = Vector2.zero;
+    public Transform aimView;
+
     // Start is called before the first frame updatMOV
     void Start()
     {
@@ -35,24 +39,44 @@ public class InputManager : MonoBehaviour
     {
         float speed = stats.CurrentSpeed;
 
-        Debug.Log(inputRequester == null );
-
-        if (inputRequester.InputButtonDown(EInputButtons.RB, inputID))
+        Vector2 old = aim;
+        aim = new Vector2(input.InputAxis(EInputAxis.viewHorizontal, inputID), -input.InputAxis(EInputAxis.viewVertical, inputID)).normalized;
+        if (aim.magnitude == 0) aim = old;
+        
+       
+        if (input.InputButtonDown(EInputButtons.RB, inputID))
         {
             playerBody.Attack();
         }
 
-        if(inputRequester.InputButtonDown(EInputButtons.A, inputID))
+        if (hook.hookState == HookState.hooked) {
+            float vx = rigidbody.velocity.x;
+            playerBody.transform.rotation = Quaternion.identity;
+
+            playerBody.transform.Rotate(Vector3.up,Mathf.Clamp(-rigidbody.velocity.x*30,-90,90)+90);
+            playerBody.transform.Rotate(Vector3.forward,.8f*Vector2.Angle(vx >= 0?Vector2.right:Vector2.left, rigidbody.velocity));
+            
+            
+            
+        }
+        else {
+            playerBody.transform.rotation = Quaternion.Euler(0,Mathf.Clamp(-rigidbody.velocity.x*30,-90,90)+90, 0);
+        }
+
+        if(input.InputButtonDown(EInputButtons.RB, inputID))
         {
             if(hook.hookState == HookState.hooked)
             {
-                playerBody.rig.velocity = new Vector3(playerBody.rig.velocity.x, 0);
-                playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
+                //playerBody.rig.velocity = new Vector3(0, 0);
+                playerBody.rig.AddForce(playerBody.rig.velocity.normalized * pullForce/2);
+                playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce/2);
+                //playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
                 hook.hookState = HookState.returning;
             }
 
-            if(playerBody.IsGrounded())
+            else if(playerBody.IsGrounded())
             {
+                playerBody.rig.velocity = new Vector3(playerBody.rig.velocity.x, 0);
                 playerBody.rig.AddForce(Vector3.up * jumpForce);
             }
         }
@@ -71,8 +95,12 @@ public class InputManager : MonoBehaviour
             {
                 xVel += friction * Time.deltaTime;
             }*/
-            xVel = Mathf.MoveTowards(xVel, inputRequester.InputAxis(EInputAxis.movementHorizontal, inputID) * speed, Time.deltaTime*20);
-           // xVel += input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed * Time.fixedDeltaTime;
+            float prev = xVel;
+            xVel = Mathf.MoveTowards(xVel, input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed, Time.deltaTime*20);
+            if (hook.hookState == HookState.hooked && Mathf.Abs(xVel) < Mathf.Abs(prev)) {
+                xVel = prev;
+            }
+            // xVel += input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed * Time.fixedDeltaTime;
         }
         else
         {
@@ -90,9 +118,14 @@ public class InputManager : MonoBehaviour
 
             if (hook.hookState == HookState.stored)
             {
-                hook.ShootHook((new Vector3(inputRequester.InputAxis(EInputAxis.movementHorizontal, inputID), -inputRequester.InputAxis(EInputAxis.movementVertical, inputID))).normalized);
+                hook.ShootHook(aim.normalized);
                 // hook.ShootHook((new Vector3(Input.GetAxis("move_x_" + inputID), Input.GetAxis("move_x_" + inputID))).normalized);
             }
         }
+    }
+
+    private void LateUpdate() {
+        aimView.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, aim));
+        
     }
 }

@@ -30,7 +30,8 @@ public class PlayerBody : MonoBehaviour
         {
             this.transform.rotation = Quaternion.LookRotation(Vector3.back);
         }*/
-        transform.rotation = Quaternion.Euler(0,Mathf.Clamp(-xVel*30,-90,90)+90, 0);
+        
+        
 
         if (IsGrounded())
             animator.SetFloat("speed", Mathf.Abs(xVel));

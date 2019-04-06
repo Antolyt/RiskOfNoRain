@@ -13,18 +13,23 @@
           <e p="sky.shader" t="Include" />
         </e>
         <e p="Scripts" t="Include">
+          <e p="Burnable.cs" t="Include" />
           <e p="Hook.cs" t="Include" />
+          <e p="Input" t="Include">
+            <e p="InputCreator.cs" t="Include" />
+            <e p="InputManagerEditor.cs" t="Include" />
+            <e p="InputRequester.cs" t="Include" />
+            <e p="UnityInputChanger.cs" t="Include" />
+          </e>
           <e p="InputManager.cs" t="Include" />
           <e p="Pickups" t="Include">
             <e p="Buff.cs" t="Include" />
-            <e p="BuffManager.cs" t="Include" />
             <e p="Pickup.cs" t="Include" />
             <e p="PickupManager.cs" t="Include" />
             <e p="PickupSpawner.cs" t="Include" />
           </e>
           <e p="Player" t="Include">
-            <e p="PlayerManager.cs" t="Include" />
-            <e p="PlayerStats.cs" t="Include" />
+            <e p="Player.cs" t="Include" />
           </e>
           <e p="PlayerBody.cs" t="Include" />
           <e p="UI" t="Include">
