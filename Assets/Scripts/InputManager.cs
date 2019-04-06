@@ -39,9 +39,7 @@ public class InputManager : MonoBehaviour
             {
                 playerBody.rig.velocity = new Vector3(playerBody.rig.velocity.x, 0);
                 playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
-                playerBody.rig.AddForce(Vector3.up * jumpForce);
                 hook.hookState = HookState.returning;
-                playerBody.ClearConnections();
             }
 
             if(playerBody.IsGrounded())

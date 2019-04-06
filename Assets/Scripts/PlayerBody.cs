@@ -6,16 +6,11 @@ using UnityEngine;
 
 public class PlayerBody : MonoBehaviour
 {
-    Dictionary<int, GameObject> conntectedEnvironment;
     public Animator animator;
     public Rigidbody2D rig;
     public Transform playerSpawner;
     public ParticleSystem ps;
-
-    private void Awake()
-    {
-        conntectedEnvironment = new Dictionary<int, GameObject>();
-    }
+    public float maxDistanceToGroundForJump;
 
     // Start is called before the first frame update
     void Start()
@@ -50,28 +45,9 @@ public class PlayerBody : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return conntectedEnvironment.Count > 0;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
-        {
-            conntectedEnvironment.Add(collision.gameObject.GetInstanceID(), collision.gameObject);
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
-        {
-            conntectedEnvironment.Remove(collision.gameObject.GetInstanceID());
-        }
-    }
-
-    public void ClearConnections()
-    {
-        conntectedEnvironment.Clear();
+        //return conntectedEnvironment.Count > 0;
+        RaycastHit2D rc = Physics2D.Raycast(this.transform.position, Vector3.down, maxDistanceToGroundForJump, LayerMask.GetMask("Environment"));
+        return rc.transform != null;
     }
 
     public void Attack()
