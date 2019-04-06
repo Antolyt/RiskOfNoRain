@@ -48,7 +48,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -4740,6 +4740,7 @@ GameObject:
   - component: {fileID: 9161077922461405443}
   - component: {fileID: 9161077922461405470}
   - component: {fileID: 9161077922461405471}
+  - component: {fileID: 1236854068}
   m_Layer: 9
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -4755,7 +4756,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9161077922461405464}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.04, z: 0}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1895816999}
@@ -4799,6 +4800,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1236854068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161077922461405464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce10d37120fef5840939a552ff7d0ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6026773316778404672}
+  rig: {fileID: 9161077922461405471}
+  playerSpawner: {fileID: 0}
+  ps: {fileID: 486210666}
 --- !u!1 &9161077922940452611
 GameObject:
   m_ObjectHideFlags: 0
@@ -4849,7 +4866,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9161077922940452611}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4933,6 +4950,8 @@ MonoBehaviour:
   speed: 10
   hookState: 0
   maxDistance: 5
+  hookCollectRange: 0.4
+  meshRenderer: {fileID: 9161077922940452608}
 --- !u!1 &9161077923382215725
 GameObject:
   m_ObjectHideFlags: 0
@@ -4943,6 +4962,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9161077923382215699}
   - component: {fileID: 9161077923382215724}
+  - component: {fileID: 197376128}
+  - component: {fileID: 197376129}
+  - component: {fileID: 197376130}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4981,8 +5003,51 @@ MonoBehaviour:
   rigidbody: {fileID: 9161077922461405471}
   jumpForce: 600
   pullForce: 600
-  speed: 4
+  friction: 10
   hook: {fileID: 9161077922940452610}
+  playerBody: {fileID: 1236854068}
+--- !u!114 &197376128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161077923382215725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79c5927d608f92b459163bcb51ba1600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &197376129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161077923382215725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1983f3ac56a26a4b8b4901c8d0bfa6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  damage: 1
+  attackSpeed: 1
+  currentSpeed: 0
+  currentDamage: 0
+  currentAttackSpeed: 0
+--- !u!114 &197376130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161077923382215725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8ec62e9c5daf54082950d89ca0ff31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6026773316787887648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5331,6 +5396,12 @@ PrefabInstance:
 --- !u!4 &6026773316788274336 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 50e3dea9ada0eaa43af1cda9ae5c4ae2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6026773316787887648}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6026773316778404672 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 50e3dea9ada0eaa43af1cda9ae5c4ae2,
     type: 3}
   m_PrefabInstance: {fileID: 6026773316787887648}
   m_PrefabAsset: {fileID: 0}
