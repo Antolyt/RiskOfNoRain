@@ -1,22 +1,44 @@
 fileFormatVersion: 2
-guid: c739c3fc0755a364bb2360cd522a1823
+guid: be980e973a248154f8ba07633d037993
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: unnamed
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Sphere
+    100000: Icosphere_000
+    100002: Icosphere_001
+    100004: Icosphere_002
+    100006: Icosphere_003
+    100008: Icosphere_004
+    100010: //RootNode
+    400000: Icosphere_000
+    400002: Icosphere_001
+    400004: Icosphere_002
+    400006: Icosphere_003
+    400008: Icosphere_004
+    400010: //RootNode
+    2100000: Material_001
+    2300000: Icosphere_000
+    2300002: Icosphere_001
+    2300004: Icosphere_002
+    2300006: Icosphere_003
+    2300008: Icosphere_004
+    3300000: Icosphere_000
+    3300002: Icosphere_001
+    3300004: Icosphere_002
+    3300006: Icosphere_003
+    3300008: Icosphere_004
+    4300000: Icosphere_003
+    4300002: Icosphere_002
+    4300004: Icosphere_001
+    4300006: Icosphere_000
+    4300008: Icosphere_004
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: unnamed
-    second: {fileID: 2100000, guid: 93c502e1f3c0e1c4b8df812807e31708, type: 2}
+      name: Material_001
+    second: {fileID: 2100000, guid: 5e3759fbb0aa76540b4f0be4f18c92a5, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

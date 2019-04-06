@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: c739c3fc0755a364bb2360cd522a1823
+guid: 1f2d3ad0027e51e4785ff0722ff51203
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: unnamed
+    2100000: grass
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Sphere
+    4300000: Cube_002
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: unnamed
-    second: {fileID: 2100000, guid: 93c502e1f3c0e1c4b8df812807e31708, type: 2}
+      name: grass
+    second: {fileID: 2100000, guid: a39202ca74dd83747a88c79febfb695e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -1,22 +1,31 @@
 fileFormatVersion: 2
-guid: c739c3fc0755a364bb2360cd522a1823
+guid: bf71c103a4cfe6f4f9df529a9bba5f1a
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Cube_000
+    100004: Cube_001
+    100006: Cube_002
     400000: //RootNode
-    2100000: unnamed
+    400002: Cube_000
+    400004: Cube_001
+    400006: Cube_002
+    2100000: Material_001
     2300000: //RootNode
+    2300002: Cube_000
+    2300004: Cube_001
+    2300006: Cube_002
     3300000: //RootNode
-    4300000: Sphere
+    3300002: Cube_000
+    3300004: Cube_001
+    3300006: Cube_002
+    4300000: Cube_001
+    4300002: Cube_002
+    4300004: Cube_000
     7400000: Default Take
     9500000: //RootNode
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: unnamed
-    second: {fileID: 2100000, guid: 93c502e1f3c0e1c4b8df812807e31708, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0

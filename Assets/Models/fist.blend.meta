@@ -1,22 +1,29 @@
 fileFormatVersion: 2
-guid: c739c3fc0755a364bb2360cd522a1823
+guid: d82596c7b2a232f4d97396a0c5a47620
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
     2100000: unnamed
+    2100002: skin
+    2100004: splsh
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Sphere
+    4300000: Cube
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: unnamed
-    second: {fileID: 2100000, guid: 93c502e1f3c0e1c4b8df812807e31708, type: 2}
+      name: skin
+    second: {fileID: 2100000, guid: b43d8d4b422e7d34f8974bbeef730169, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: splsh
+    second: {fileID: 2100000, guid: 01eb0e413e056dc4ca385c0ebf3354d2, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
