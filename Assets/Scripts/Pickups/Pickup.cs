@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     [SerializeField]
-    Buff buff;
+    public Buff buff;
 
     void Start()
     {

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Stuff : MonoBehaviour
 {
+	[SerializeField] Pickup pickup;
+	[SerializeField] GameObject parent;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,6 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+		Instantiate(pickup, parent.transform);
     }
 }
