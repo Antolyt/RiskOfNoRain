@@ -22,6 +22,7 @@ public class PlayerBody : MonoBehaviour
     void Update()
     {
         float xVel = this.GetComponent<Rigidbody2D>().velocity.x;
+        /*
         if (xVel > 0.1f)
         {
             this.transform.rotation = Quaternion.LookRotation(Vector3.forward);
@@ -29,7 +30,8 @@ public class PlayerBody : MonoBehaviour
         if (xVel < -0.1f)
         {
             this.transform.rotation = Quaternion.LookRotation(Vector3.back);
-        }
+        }*/
+        transform.rotation = Quaternion.Euler(0,Mathf.Clamp(-xVel*30,-90,90)+90, 0);
 
         if (IsGrounded())
             animator.SetFloat("speed", Mathf.Abs(xVel));
@@ -53,6 +55,6 @@ public class PlayerBody : MonoBehaviour
     public void Attack()
     {
         animator.SetBool("attacking", true);
-        ps.Play();
+
     }
 }

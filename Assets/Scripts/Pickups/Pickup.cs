@@ -19,7 +19,7 @@ public class Pickup : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        BuffManager buffManager = collision.GetComponentInParent<BuffManager>();
+        Player.BuffManager buffManager = collision.GetComponentInParent<Player>().buffManager;
 
         if (buffManager != null)
         {
