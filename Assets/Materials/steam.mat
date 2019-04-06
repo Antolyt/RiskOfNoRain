@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: metal
+  m_Name: steam
   m_Shader: {fileID: 4800000, guid: 787c2682e2d8bcd45bbf9a1c7365d716, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -72,21 +72,21 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _amplitude: 1.5
-    - _explosion: 0
-    - _frequency: 2
-    - _gain: 0.5
-    - _lacunarity: 2
+    - _amplitude: 0.5
+    - _explosion: 2.52
+    - _frequency: 0.2
+    - _gain: 0.63
+    - _lacunarity: 1.26
     - _monochromatic: 0
     - _octaves: 7
     - _offsetX: 0
     - _offsetY: 0
-    - _power: 1
+    - _power: 1.6
     - _range: 0.5
     - _scale: 1
     - _seed: 0
-    - _value: 0
+    - _value: -0.43
     m_Colors:
-    - _Color: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _color: {r: 1, g: 1, b: 1, a: 1}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465788, g: 0.4964143, b: 0.57481515, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641418, b: 0.5748151, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5515,6 +5515,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9161077922461405470, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9161077923382215699, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5568,11 +5573,6 @@ PrefabInstance:
     - target: {fileID: 9161077923382215699, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9161077922461405470, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
-        type: 3}
-      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBody : MonoBehaviour
 {
     Dictionary<int, GameObject> conntectedEnvironment;
+    public Animator animator;
 
     private void Awake()
     {
@@ -29,6 +30,11 @@ public class PlayerBody : MonoBehaviour
         {
             this.transform.rotation = Quaternion.LookRotation(Vector3.back);
         }
+
+        if (IsGrounded())
+            animator.SetFloat("speed", Mathf.Abs(xVel));
+        else
+            animator.SetFloat("speed", 0);
     }
 
     public bool IsGrounded()
