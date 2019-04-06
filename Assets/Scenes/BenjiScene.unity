@@ -206,6 +206,9 @@ MonoBehaviour:
   - {fileID: 5145447401649184501, guid: d8acc225a9983b8428965261bddeb757, type: 3}
   uipickups: []
   rotationSpeed: 1
+  offsetX: 2
+  offsetY: 0
+  offsetZ: 0
 --- !u!1 &1351083278
 GameObject:
   m_ObjectHideFlags: 0
