@@ -35,7 +35,9 @@ public class InputManager : MonoBehaviour
             {
                 rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0);
                 rigidbody.AddForce((hook.transform.position - rigidbody.transform.position).normalized * pullForce);
+                rigidbody.AddForce(Vector3.up * jumpForce);
                 hook.hookState = HookState.returning;
+                playerBody.ClearConnections();
             }
 
             if(playerBody.IsGrounded())
@@ -47,40 +49,22 @@ public class InputManager : MonoBehaviour
         Vector3 position = rigidbody.transform.position;
         float xVel = rigidbody.velocity.x;
 
-        if (xVel > speed)
+        if(!playerBody.IsGrounded())
         {
-            xVel -= friction * Time.deltaTime;
-            xVel += Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        }
-        else if (xVel < -speed)
-        {
-            xVel += friction * Time.deltaTime;
+            if (xVel > speed)
+            {
+                xVel -= friction * Time.deltaTime;
+            }
+            else if (xVel < -speed)
+            {
+                xVel += friction * Time.deltaTime;
+            }
             xVel += Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         }
         else
         {
             xVel = Input.GetAxis("Horizontal") * speed;
         }
-
-        //if(Input.GetAxis("Horizontal") > 0)
-        //{
-        //    if (xVel < -Input.GetAxis("Horizontal"))
-        //    {
-        //        xVel = xVel + Input.GetAxis("Horizontal") * speed;
-        //    }
-        //    else
-        //        xVel = Mathf.Max(Input.GetAxis("Horizontal") * speed, xVel);
-        //}
-
-        //if (Input.GetAxis("Horizontal") < 0)
-        //{
-        //    if (xVel > -Input.GetAxis("Horizontal"))
-        //    {
-        //        xVel = xVel + Input.GetAxis("Horizontal") * speed;
-        //    }
-        //    else
-        //        xVel = Mathf.Min(Input.GetAxis("Horizontal") * speed, xVel);
-        //}
 
         rigidbody.velocity = new Vector3(xVel, rigidbody.velocity.y);
 
@@ -95,7 +79,6 @@ public class InputManager : MonoBehaviour
             {
                 hook.ShootHook((new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))).normalized);
             }
-                
         }
     }
 }

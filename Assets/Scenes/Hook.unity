@@ -1655,7 +1655,7 @@ PrefabInstance:
     - target: {fileID: 9161077922940452608, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9161077922940452610, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
         type: 3}
@@ -1665,6 +1665,11 @@ PrefabInstance:
     - target: {fileID: 9161077922940452610, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
         type: 3}
       propertyPath: renderer
+      value: 
+      objectReference: {fileID: 635694495}
+    - target: {fileID: 9161077922940452610, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
+        type: 3}
+      propertyPath: meshRenderer
       value: 
       objectReference: {fileID: 635694495}
     - target: {fileID: 9161077923382215699, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
