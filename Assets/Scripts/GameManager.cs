@@ -6,7 +6,8 @@ using UnityEngine;
 public enum Team
 {
     Sand, 
-    Fire
+    Fire, 
+    LastIndex
 }
 
 public class GameManager : MonoBehaviour
@@ -15,28 +16,26 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     Player playerPrefab;
-    InputRequester input;
+
+    public static GameManager Instance;
+
+    void Awake()
+    {
+        Instance = this;
+        players = new List<Player>();
+
+        InitiateGame();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        input = GetComponent<InputRequester>();
-        players = new List<Player>();
-
-
-        InitiateGame();
 
         DontDestroyOnLoad(this.gameObject);
     }
 
     void InitiateGame()
     {
-        SpawnNewPlayer(Team.Sand);
-        SpawnNewPlayer(Team.Fire);
-        SpawnNewPlayer(Team.Sand);
-        SpawnNewPlayer(Team.Fire);
-        SpawnNewPlayer(Team.Sand);
-        SpawnNewPlayer(Team.Fire);
         SpawnNewPlayer(Team.Sand);
         SpawnNewPlayer(Team.Fire);
     }
@@ -47,12 +46,24 @@ public class GameManager : MonoBehaviour
 
     }
 
+    Vector3 GetRandomSpawnPosition()
+    {
+        return transform.position + Vector3.up + Vector3.right * Random.Range(-8, 8);
+    }
+
     void SpawnNewPlayer(Team team)
     {
-        Player player = Instantiate(playerPrefab, transform.position + Vector3.up + Vector3.right * Random.Range(-8, 8), Quaternion.identity);
+        Player player = Instantiate(playerPrefab, GetRandomSpawnPosition(), Quaternion.identity);
 
-        player.InitiatePlayer(team, players.Count, input);
+        player.InitiatePlayer(team, players.Count);
 
         players.Add(player);
     }
+
+    public void RespawnPlayer(Player player)
+    {
+        player.Input.playerBody.transform.position = GetRandomSpawnPosition();
+    }
+
+    public List<Player> Players { get => players; }
 }

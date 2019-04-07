@@ -17,12 +17,8 @@ public class InputManager : MonoBehaviour
  
     public Hook hook;
     public PlayerBody playerBody;
-
-    [SerializeField]
-    public int inputID;
-
-    [HideInInspector]
-    public InputRequester inputRequester;
+    
+    InputRequester inputRequester;
     Player.PlayerStats stats;
 
     private Vector2 aim = Vector2.zero;
@@ -31,6 +27,7 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame updatMOV
     void Start()
     {
+        inputRequester = InputRequester.Instance;
         stats = GetComponent<Player>().stats;
     }
 
@@ -40,11 +37,12 @@ public class InputManager : MonoBehaviour
         float speed = stats.CurrentSpeed;
 
         Vector2 old = aim;
-        aim = new Vector2(input.InputAxis(EInputAxis.viewHorizontal, inputID), -input.InputAxis(EInputAxis.viewVertical, inputID)).normalized;
+        aim = new Vector2(inputRequester.InputAxis(EInputAxis.viewHorizontal, stats.InputID), 
+            -inputRequester.InputAxis(EInputAxis.viewVertical, stats.InputID)).normalized;
         if (aim.magnitude == 0) aim = old;
         
        
-        if (input.InputButtonDown(EInputButtons.RB, inputID))
+        if (inputRequester.InputButtonDown(EInputButtons.RB, stats.InputID))
         {
             playerBody.Attack();
         }
@@ -63,7 +61,7 @@ public class InputManager : MonoBehaviour
             playerBody.transform.rotation = Quaternion.Euler(0,Mathf.Clamp(-rigidbody.velocity.x*30,-90,90)+90, 0);
         }
 
-        if(input.InputButtonDown(EInputButtons.RB, inputID))
+        if(inputRequester.InputButtonDown(EInputButtons.RB, stats.InputID))
         {
             if(hook.hookState == HookState.hooked)
             {
@@ -86,30 +84,20 @@ public class InputManager : MonoBehaviour
 
         if(!playerBody.IsGrounded())
         {
-            /*
-            if (xVel > speed)
-            {
-                xVel -= friction * Time.deltaTime;
-            }
-            else if (xVel < -speed)
-            {
-                xVel += friction * Time.deltaTime;
-            }*/
             float prev = xVel;
-            xVel = Mathf.MoveTowards(xVel, input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed, Time.deltaTime*20);
+            xVel = Mathf.MoveTowards(xVel, inputRequester.InputAxis(EInputAxis.movementHorizontal, stats.InputID) * speed, Time.deltaTime*20);
             if (hook.hookState == HookState.hooked && Mathf.Abs(xVel) < Mathf.Abs(prev)) {
                 xVel = prev;
             }
-            // xVel += input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed * Time.fixedDeltaTime;
         }
         else
         {
-            xVel = Mathf.MoveTowards(xVel, inputRequester.InputAxis(EInputAxis.movementHorizontal, inputID) * speed, Time.deltaTime * 40);
+            xVel = Mathf.MoveTowards(xVel, inputRequester.InputAxis(EInputAxis.movementHorizontal, stats.InputID) * speed, Time.deltaTime * 40);
         }
 
         playerBody.rig.velocity = new Vector3(xVel, playerBody.rig.velocity.y);
 
-        if(inputRequester.InputButtonDown(EInputButtons.LB, inputID))
+        if(inputRequester.InputButtonDown(EInputButtons.LB, stats.InputID))
         {
             if(hook.hookState == HookState.hooked)
             {
@@ -119,13 +107,16 @@ public class InputManager : MonoBehaviour
             if (hook.hookState == HookState.stored)
             {
                 hook.ShootHook(aim.normalized);
-                // hook.ShootHook((new Vector3(Input.GetAxis("move_x_" + inputID), Input.GetAxis("move_x_" + inputID))).normalized);
             }
+        }
+
+        if (playerBody.transform.position.y < -25)
+        {
+            GameManager.Instance.RespawnPlayer(this.GetComponent<Player>());
         }
     }
 
     private void LateUpdate() {
         aimView.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, aim));
-        
     }
 }

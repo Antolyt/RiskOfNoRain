@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CameraFollowMult : MonoBehaviour {
+
     public Transform[] follows;
     float dist = 10;
 
@@ -10,7 +12,7 @@ public class CameraFollowMult : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        
+        follows = GameManager.Instance.Players.Select(item => item.Input.playerBody.transform).ToArray();
     }
 
     // Update is called once per frame

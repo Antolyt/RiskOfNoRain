@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -13,8 +14,6 @@ public class Player : MonoBehaviour
         float damage;
         [SerializeField]
         float attackSpeed;
-
-        bool swapActive = false;
 
         public void ApplyBuff(Buff buff, Player player)
         {
@@ -30,8 +29,11 @@ public class Player : MonoBehaviour
                     CurrentAttackSpeed += buff.ModifierAmount;
                     break;
                 case Buff.Stat.SwapPickup:
-                    swapActive = true;
-
+                    if(player.stats.SwapPlayerID < 0)
+                    {
+                        player.InitiateSwap(buff);
+                    }
+                    InputID = SwapPlayerID;
                     break;
                 default:
                     Debug.LogWarning("Case " + buff.ManipulatedStat.ToString() + " is not implemented yet");
@@ -57,7 +59,7 @@ public class Player : MonoBehaviour
             CurrentSpeed = speed;
             CurrentDamage = damage;
             CurrentAttackSpeed = attackSpeed;
-            swapActive = false;
+            InputID = ActualInputID;
         }
 
         void Update()
@@ -70,7 +72,14 @@ public class Player : MonoBehaviour
         public float CurrentAttackSpeed { get; private set; }
 
         public float CurrentDamage { get; private set; }
-        public int SwapPlayerID { get; set; }
+
+        public int SwapPlayerID { get; set; } = -1;
+
+        public int InputID { get; private set; }
+
+        public int ActualInputID { get; set; }
+
+        public bool IsSwapActive { get => SwapPlayerID >= 0; }
     }
 
     public class BuffManager
@@ -124,7 +133,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        input = GetComponent<InputManager>();
+        Input = GetComponent<InputManager>();
     }
 
     void Start()
@@ -138,20 +147,31 @@ public class Player : MonoBehaviour
         buffManager.ApplyAllBuffs(this);
     }
 
-    public void InitiatePlayer(Team team, int inputID, InputRequester inputRequester)
+    public void InitiatePlayer(Team team, int inputID)
     {
         Team = team;
-        input.inputRequester = inputRequester;
-        input.inputID = inputID;
-
+        stats.ActualInputID = inputID;
     }
 
-    public void InitiateSwap()
+    public void InitiateSwap(Buff buff)
     {
-        int otherPlayerID = ( input.inputID == 0 ) ? 1 : 0;
+        List<Player> possipleSwaps = GameManager.Instance.Players
+            .Where(p => p.Team != Team && p.stats.IsSwapActive == false).ToList();
 
-        // stats.SwapPlayerID = 
+        if (possipleSwaps != null && possipleSwaps.Count > 0)
+        {
+            Player otherPlayer = possipleSwaps[Random.Range(0, possipleSwaps.Count)];
+
+            stats.SwapPlayerID = otherPlayer.stats.InputID;
+            otherPlayer.buffManager.AddBuff(Instantiate(buff));
+            otherPlayer.stats.SwapPlayerID = stats.InputID;
+        }
+        else 
+        {
+            Debug.LogWarning("Cannot Swap right now");
+        }
     }
 
     public Team Team { get; private set; }
+    public InputManager Input { get => input; private set => input = value; }
 }
