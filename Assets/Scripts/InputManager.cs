@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.IO;
+using UnityEditor;
 
 public class InputManager : MonoBehaviour
 {
@@ -18,18 +19,22 @@ public class InputManager : MonoBehaviour
  
     public Hook hook;
     public PlayerBody playerBody;
+    public Player player;
     
     InputRequester inputRequester;
     Player.PlayerStats stats;
 
     private Vector2 aim = Vector2.zero;
     public Transform aimView;
+    public GameObject walkDust;
 
     // Start is called before the first frame updatMOV
     void Start()
     {
         inputRequester = InputRequester.Instance;
         stats = GetComponent<Player>().stats;
+        playerBody.inputManager = this;
+        player = GetComponent<Player>();
     }
 
     // PlayerUpdate needs to be called by Playermanager to fix Execution order!
@@ -43,10 +48,7 @@ public class InputManager : MonoBehaviour
         if (aim.magnitude == 0) aim = old;
         
        
-        if (inputRequester.InputButtonDown(EInputButtons.RB, stats.InputID))
-        {
-            playerBody.Attack();
-        }
+
 
         if (hook.hookState == HookState.hooked) {
             float vx = rigidbody.velocity.x;
@@ -80,6 +82,40 @@ public class InputManager : MonoBehaviour
             }
         }
 
+        if (inputRequester.InputAxis(EInputAxis.triggerLeft, stats.InputID) > .1f) {
+            //shoot here
+            if (player.attackTimer <= 0) {
+                playerBody.Attack();
+                player.source.PlayOneShot((player.Team == Team.Sand?player.sShovel:player.fSwing),.2f);
+                var rot = Quaternion.Euler(0,0, Vector2.SignedAngle(Vector2.right, aim));
+                Instantiate(player.Team == Team.Sand?player.attackPart:player.attackPart2, playerBody.transform.position, rot);
+                Instantiate(player.splashPart, playerBody.transform.position, rot);
+                
+                for(float a = -20f;a < 20f;a+=4f){
+                    var hit = Physics2D.Raycast(playerBody.transform.position + Quaternion.Euler(0,0,a)* aim, Quaternion.Euler(0,0,a)* aim, 5f, LayerMask.GetMask("Player","Environment"));
+                    if (hit) {
+                        
+                        
+                        var pb = hit.transform.GetComponent<PlayerBody>();
+                        if (pb != null) {
+                            pb.GetHit(playerBody);
+                            Debug.DrawRay(playerBody.transform.position, Quaternion.Euler(0,0,a)* aim*5f,Color.red,2f);
+                            break;
+                        }
+                        else {
+                            Debug.DrawLine(playerBody.transform.position,hit.point,Color.green,2f);
+                        }
+                   
+                    }
+
+                    Debug.DrawRay(playerBody.transform.position+ Quaternion.Euler(0,0,a)* aim, Quaternion.Euler(0,0,a)* aim * 100f,Color.white,2f);
+                   
+                }
+                player.attackTimer = player.stats.CurrentAttackSpeed;
+                    
+            }
+        }
+
         Vector3 position = playerBody.rig.transform.position;
         float xVel = playerBody.rig.velocity.x;
 
@@ -94,6 +130,9 @@ public class InputManager : MonoBehaviour
         else
         {
             xVel = Mathf.MoveTowards(xVel, inputRequester.InputAxis(EInputAxis.movementHorizontal, stats.InputID) * speed, Time.deltaTime * 40);
+            if (Mathf.Abs(xVel) > .2) {
+                Instantiate(walkDust, playerBody.transform.position + Vector3.down * .5f, Quaternion.identity);
+            }
         }
 
         playerBody.rig.velocity = new Vector3(xVel, playerBody.rig.velocity.y);

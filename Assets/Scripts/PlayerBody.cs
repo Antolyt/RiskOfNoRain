@@ -11,11 +11,15 @@ public class PlayerBody : MonoBehaviour
     public ParticleSystem ps;
     public float maxDistanceToGroundForJump;
 
+    public InputManager inputManager;
+
     // Indices should correspond to Team enum
     [SerializeField]
     GameObject[] modelPrefabs;
     [SerializeField]
     GameObject[] particleSystemPrefabs;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +31,12 @@ public class PlayerBody : MonoBehaviour
             Debug.LogError("Playerbody is missing Models for Teams");
         }
         */
+    }
+
+    public void GetHit(PlayerBody origen) {
+        var p = origen.inputManager.player;
+        inputManager.player.GetHit(p);
+       
     }
 
     // Update is called once per frame

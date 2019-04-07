@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour {
     // Start is called before the first frame update
-    void Start()
-    {
 
+    private Vector3 up;
+    
+    void Start() {
+        up = transform.up;
     }
 
     // Update is called once per frame
     void Update() {
-        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
+        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position,up);
     }
 }

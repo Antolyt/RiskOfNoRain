@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     Player playerPrefab;
+    public GameObject pyromaniac;
+    public GameObject sandman;
 
     public static GameManager Instance;
 
@@ -71,8 +73,25 @@ public class GameManager : MonoBehaviour
     void SpawnNewPlayer(Team team, int inputID)
     {
         Player player = Instantiate(playerPrefab, GetRandomSpawnPosition(), Quaternion.identity);
+        PlayerBody pb = player.GetComponentInChildren(typeof(PlayerBody)) as PlayerBody;
 
         player.InitiatePlayer(team, inputID);
+
+        switch (team)
+        {
+            case Team.Sand:
+                GameObject sm = Instantiate(sandman, pb.transform);
+                pb.animator = sm.GetComponentInChildren(typeof(Animator)) as Animator;
+                break;
+            case Team.Fire:
+                GameObject pm = Instantiate(pyromaniac, pb.transform);
+                pb.animator = pm.GetComponentInChildren(typeof(Animator)) as Animator;
+                break;
+            case Team.LastIndex:
+                break;
+            default:
+                break;
+        }
 
         players.Add(player);
     }
@@ -80,6 +99,7 @@ public class GameManager : MonoBehaviour
     public void RespawnPlayer(Player player)
     {
         player.Input.playerBody.transform.position = GetRandomSpawnPosition();
+        player.OnReset();
     }
 
     public List<Player> Players { get => players; }
