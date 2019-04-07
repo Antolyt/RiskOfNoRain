@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.IO;
+using UnityEditor;
 
 public class InputManager : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class InputManager : MonoBehaviour
     void Start()
     {
         stats = GetComponent<Player>().stats;
+        playerBody.inputManager = this;
     }
 
     // PlayerUpdate needs to be called by Playermanager to fix Execution order!
@@ -44,10 +46,7 @@ public class InputManager : MonoBehaviour
         if (aim.magnitude == 0) aim = old;
         
        
-        if (input.InputButtonDown(EInputButtons.RB, inputID))
-        {
-            playerBody.Attack();
-        }
+
 
         if (hook.hookState == HookState.hooked) {
             float vx = rigidbody.velocity.x;
@@ -78,6 +77,18 @@ public class InputManager : MonoBehaviour
             {
                 playerBody.rig.velocity = new Vector3(playerBody.rig.velocity.x, 0);
                 playerBody.rig.AddForce(Vector3.up * jumpForce);
+            }
+        }
+
+        if (input.InputAxis(EInputAxis.triggerLeft) > .1f) {
+            //shoot here
+            playerBody.Attack();
+            var hit = Physics2D.Raycast(transform.position, aim, 1000f, LayerMask.GetMask("Player"));
+            if (hit) {
+                var pb = hit.transform.GetComponent<PlayerBody>();
+                if (pb) {
+                    pb.getHit(playerBody);
+                }
             }
         }
 

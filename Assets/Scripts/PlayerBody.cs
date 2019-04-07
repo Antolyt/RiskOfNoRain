@@ -12,10 +12,29 @@ public class PlayerBody : MonoBehaviour
     public ParticleSystem ps;
     public float maxDistanceToGroundForJump;
 
+    public InputManager inputManager;
+    public float hp = 1;
+    public float damage = .3f;
+
+    public enum Team {
+        sand,pyro,
+    }
+
+    public Team team;
+
     // Start is called before the first frame update
     void Start()
     {
 
+    }
+
+    public void getHit(PlayerBody origen) {
+        if (origen.team != team) {
+            hp -= origen.damage;
+            if (hp <= 0) {
+                // die here
+            }
+        }
     }
 
     // Update is called once per frame
