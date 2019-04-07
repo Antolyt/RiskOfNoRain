@@ -94,7 +94,7 @@ public class JoinScreen : MonoBehaviour
         if(controller.Count > 0 && startGame)
         {
             ConnectedController.Instance.controllerData = controller;
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainScene");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
         }
     }
 }

@@ -144,6 +144,8 @@ public class Player : MonoBehaviour
                 activeBuffs.Remove(buff);
             }
         }
+
+        public List<Buff> ActiveBuffs { get => activeBuffs; }
     }
 
     

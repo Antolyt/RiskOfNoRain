@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SpeedBuff
   m_EditorClassIdentifier: 
   manipulatedStat: 0
-  modifierAmount: 0.1
+  modifierAmount: 2
   duration: 30
