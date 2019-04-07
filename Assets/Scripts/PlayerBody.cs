@@ -20,11 +20,13 @@ public class PlayerBody : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int numberOfTeams = (int)Team.LastIndex;
+        /*
+         * int numberOfTeams = (int)Team.LastIndex;
         if (modelPrefabs.Length != numberOfTeams || particleSystemPrefabs.Length != numberOfTeams)
         {
             Debug.LogError("Playerbody is missing Models for Teams");
         }
+        */
     }
 
     // Update is called once per frame
