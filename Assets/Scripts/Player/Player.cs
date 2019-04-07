@@ -108,19 +108,21 @@ public class Player : MonoBehaviour
 
         public void AddBuff(Buff buff)
         {
-            activeBuffs.Add(buff);
-            buff.StartBuff(player);
+            Buff newBuff = Instantiate(buff);
+            activeBuffs.Add(newBuff);
+            newBuff.StartBuff(player);
         }
 
         public void ApplyAllBuffs(Player player)
         {
+            expiredBuffs = new List<Buff>();
+
             foreach (Buff buff in activeBuffs)
             {
                 player.stats.ApplyBuff(buff, player);
 
                 if (buff.BuffUpdate(Time.deltaTime) == 0)
                 {
-                    Debug.Log("Destroyed Buff this round");
                     expiredBuffs.Add(buff);
                 }
             }
