@@ -12286,6 +12286,16 @@ PrefabInstance:
       propertyPath: spawner
       value: 
       objectReference: {fileID: 1183914956}
+    - target: {fileID: 128739649, guid: 9959527447f44d04da1b21bbaae030ab, type: 3}
+      propertyPath: pyromaniac
+      value: 
+      objectReference: {fileID: 5095599820432474769, guid: 4a6e022b830c9e546b9b7027e1a8683a,
+        type: 3}
+    - target: {fileID: 128739649, guid: 9959527447f44d04da1b21bbaae030ab, type: 3}
+      propertyPath: sandman
+      value: 
+      objectReference: {fileID: 5095599820432474769, guid: 28310f22e46605342abdc162fed7feab,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9959527447f44d04da1b21bbaae030ab, type: 3}
 --- !u!1 &1232193648
