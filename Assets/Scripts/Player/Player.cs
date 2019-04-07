@@ -149,6 +149,9 @@ public class Player : MonoBehaviour
     public GameObject attackPart2;
     public GameObject splashPart;
     
+    public AudioClip fSwing, sShovel;
+    public AudioSource source;
+    
     private void Awake()
     {
         Input = GetComponent<InputManager>();
