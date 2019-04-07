@@ -5,7 +5,13 @@ using System.Linq;
 
 public class BuffUI : MonoBehaviour
 {
+    [SerializeField]
     Pickup[] pickupPrefabs;
+
+    [SerializeField]
+    Vector3 VerticalOffset;
+    [SerializeField]
+    Vector3 HorizontalOffset;
 
     class BuffCounter
     {
@@ -19,7 +25,7 @@ public class BuffUI : MonoBehaviour
         public int counter;
     }
 
-    Player player;
+    public Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +35,10 @@ public class BuffUI : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+    }
+
+    public void UpdateBuffList()
     {
         List<BuffCounter> buffList = CountBuffs();
 
@@ -58,6 +68,39 @@ public class BuffUI : MonoBehaviour
 
     void SpawnBuffs(List<BuffCounter> buffList)
     {
+        foreach(Transform t in transform)
+        {
+            DestroyImmediate(t.gameObject);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            BuffCounter buffCounter = buffList[i];
+
+            for (int j = 0; j < buffCounter.counter; j++)
+            {
+                Instantiate(pickupPrefabs[(int)buffCounter.buffType],
+                    transform.position + VerticalOffset * i + HorizontalOffset * j, Quaternion.identity, this.transform);
+            }
+        }
     }
 }
