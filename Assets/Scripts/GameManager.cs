@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     public void RespawnPlayer(Player player)
     {
         player.Input.playerBody.transform.position = GetRandomSpawnPosition();
+        player.OnReset();
     }
 
     public List<Player> Players { get => players; }

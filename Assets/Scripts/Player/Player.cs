@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
     [System.Serializable]
     public class PlayerStats
     {
+        
         [SerializeField]
         float speed;
         [SerializeField]
         float damage;
         [SerializeField]
         float attackSpeed;
+        [FormerlySerializedAs("currentHp")] [SerializeField] 
+        float currentMaxHp;
+        
 
         public void ApplyBuff(Buff buff, Player player)
         {
@@ -59,6 +64,7 @@ public class Player : MonoBehaviour
             CurrentSpeed = speed;
             CurrentDamage = damage;
             CurrentAttackSpeed = attackSpeed;
+            CurrentMaxHp = currentMaxHp;
             InputID = ActualInputID;
         }
 
@@ -72,6 +78,8 @@ public class Player : MonoBehaviour
         public float CurrentAttackSpeed { get; private set; }
 
         public float CurrentDamage { get; private set; }
+        
+        public float CurrentMaxHp { get; set; }
 
         public int SwapPlayerID { get; set; } = -1;
 
@@ -130,6 +138,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     public PlayerStats stats;
     public BuffManager buffManager;
+    public float hp;
 
     private void Awake()
     {
@@ -151,6 +160,11 @@ public class Player : MonoBehaviour
     {
         Team = team;
         stats.ActualInputID = inputID;
+        OnReset();
+    }
+
+    public void OnReset() {
+        hp = stats.CurrentMaxHp;
     }
 
     public void InitiateSwap(Buff buff)
@@ -169,6 +183,17 @@ public class Player : MonoBehaviour
         else 
         {
             Debug.LogWarning("Cannot Swap right now");
+        }
+    }
+
+
+    public void GetHit(Player origen) {
+        if (Team != origen.Team) {
+            hp -= origen.stats.CurrentDamage;
+            if (hp <= 0) {
+                // die here
+                GameManager.Instance.RespawnPlayer(this);
+            }
         }
     }
 

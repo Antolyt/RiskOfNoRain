@@ -19,6 +19,7 @@ public class InputManager : MonoBehaviour
  
     public Hook hook;
     public PlayerBody playerBody;
+    public Player player;
     
     InputRequester inputRequester;
     Player.PlayerStats stats;
@@ -32,6 +33,7 @@ public class InputManager : MonoBehaviour
         inputRequester = InputRequester.Instance;
         stats = GetComponent<Player>().stats;
         playerBody.inputManager = this;
+        player = GetComponent<Player>();
     }
 
     // PlayerUpdate needs to be called by Playermanager to fix Execution order!
@@ -79,7 +81,7 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (input.InputAxis(EInputAxis.triggerLeft) > .1f) {
+        if (inputRequester.InputAxis(EInputAxis.triggerLeft) > .1f) {
             //shoot here
             playerBody.Attack();
             var hit = Physics2D.Raycast(transform.position, aim, 1000f, LayerMask.GetMask("Player"));

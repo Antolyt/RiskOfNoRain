@@ -12,8 +12,10 @@
           <e p="brick.shader" t="Include" />
           <e p="sky.shader" t="Include" />
         </e>
+        <e p="MusicMixer.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="Burnable.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
           <e p="Hook.cs" t="Include" />
           <e p="Input" t="Include">
             <e p="InputCreator.cs" t="Include" />

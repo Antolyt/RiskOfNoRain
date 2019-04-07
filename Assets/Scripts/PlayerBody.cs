@@ -12,14 +12,6 @@ public class PlayerBody : MonoBehaviour
     public float maxDistanceToGroundForJump;
 
     public InputManager inputManager;
-    public float hp = 1;
-    public float damage = .3f;
-
-    public enum Team {
-        sand,pyro,
-    }
-
-    public Team team;
 
     // Indices should correspond to Team enum
     [SerializeField]
@@ -40,12 +32,9 @@ public class PlayerBody : MonoBehaviour
     }
 
     public void getHit(PlayerBody origen) {
-        if (origen.team != team) {
-            hp -= origen.damage;
-            if (hp <= 0) {
-                // die here
-            }
-        }
+        var p = origen.inputManager.player;
+        inputManager.player.GetHit(p);
+       
     }
 
     // Update is called once per frame
