@@ -108,11 +108,13 @@ public class Hook : MonoBehaviour
         meshRenderer.enabled = false;
     }
 
-    public void ReturnHook()
+    public void PullToHook()
     {
         hookState = HookState.returning;
 
         audioSource.clip = returnSound;
         audioSource.Play();
+
+
     }
 }

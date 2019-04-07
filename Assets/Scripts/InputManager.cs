@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     public Rigidbody2D rigidbody;
     public float jumpForce = 1;
     public float pullForce = 1;
+    public float swingForce = 1;
     public float friction = 1;
  
     public Hook hook;
@@ -66,8 +67,8 @@ public class InputManager : MonoBehaviour
             if(hook.hookState == HookState.hooked)
             {
                 //playerBody.rig.velocity = new Vector3(0, 0);
-                playerBody.rig.AddForce(playerBody.rig.velocity.normalized * pullForce/2);
-                playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce/2);
+                playerBody.rig.AddForce(playerBody.rig.velocity.normalized * swingForce + Vector2.up * swingForce * 0.25f);
+                // playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
                 //playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
                 hook.hookState = HookState.returning;
             }
@@ -101,7 +102,13 @@ public class InputManager : MonoBehaviour
         {
             if(hook.hookState == HookState.hooked)
             {
-                hook.ReturnHook();
+                hook.PullToHook();
+
+                playerBody.rig.AddForce(Vector3.up * jumpForce * 0.5f);
+                // playerBody.rig.AddForce(playerBody.rig.velocity.normalized * pullForce);
+                playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
+                //playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
+                hook.hookState = HookState.returning;
             }
 
             if (hook.hookState == HookState.stored)
