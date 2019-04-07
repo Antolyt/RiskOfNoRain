@@ -551,7 +551,7 @@ MonoBehaviour:
     damage: 1
     attackSpeed: 1
     currentMaxHp: 4
-  hp: 0
+  hp: 4
   attackTimer: 0
   attackPart: {fileID: 5571739760825006699, guid: cf98326033659ab40bf5d4035a6d55cf,
     type: 3}

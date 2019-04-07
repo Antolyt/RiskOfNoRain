@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e709ef7d4d39d49a967d52fb2e1cdb, type: 3}
   m_Name: InputCreator
   m_EditorClassIdentifier: 
-  _numJoysticks: 8
+  _numJoysticks: 16
   _ignoreCount: 0
   _axisGravity: 0
   _axisDead: 0.19

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: AttackSpeedBuff
   m_EditorClassIdentifier: 
   manipulatedStat: 2
-  modifierAmount: 0.1
+  modifierAmount: -0.25
   duration: 30
