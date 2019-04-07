@@ -86,6 +86,7 @@ public class InputManager : MonoBehaviour
             //shoot here
             if (player.attackTimer <= 0) {
                 playerBody.Attack();
+                player.source.PlayOneShot((player.Team == Team.Sand?player.sShovel:player.fSwing),.2f);
                 var rot = Quaternion.Euler(0,0, Vector2.SignedAngle(Vector2.right, aim));
                 Instantiate(player.Team == Team.Sand?player.attackPart:player.attackPart2, playerBody.transform.position, rot);
                 Instantiate(player.splashPart, playerBody.transform.position, rot);
