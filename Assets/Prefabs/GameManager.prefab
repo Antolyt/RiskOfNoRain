@@ -80,3 +80,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 197376130, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab, type: 3}
+  pyromaniac: {fileID: 5095599820432474769, guid: 4a6e022b830c9e546b9b7027e1a8683a,
+    type: 3}
+  sandman: {fileID: 5095599820432474769, guid: 28310f22e46605342abdc162fed7feab, type: 3}
