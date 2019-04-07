@@ -73,19 +73,19 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     - _amplitude: 1.5
-    - _explosion: 0
-    - _frequency: 2
-    - _gain: 0.5
-    - _lacunarity: 2
+    - _explosion: 0.6
+    - _frequency: 1.41
+    - _gain: 0.251
+    - _lacunarity: 1.78
     - _monochromatic: 0
     - _octaves: 7
     - _offsetX: 0
     - _offsetY: 0
-    - _power: 1
+    - _power: 3.59
     - _range: 0.5
     - _scale: 1
     - _seed: 0
-    - _value: 0
+    - _value: -0.14
     m_Colors:
     - _Color: {r: 0.39661428, g: 0.9150943, b: 0.11654504, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
