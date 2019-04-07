@@ -31,7 +31,7 @@ public class PlayerBody : MonoBehaviour
         */
     }
 
-    public void getHit(PlayerBody origen) {
+    public void GetHit(PlayerBody origen) {
         var p = origen.inputManager.player;
         inputManager.player.GetHit(p);
        

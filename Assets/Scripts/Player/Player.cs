@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -141,7 +143,11 @@ public class Player : MonoBehaviour
     public PlayerStats stats;
     public BuffManager buffManager;
     public float hp;
+    public float attackTimer = 0;
 
+    public GameObject attackPart;
+    public GameObject splashPart;
+    
     private void Awake()
     {
         Input = GetComponent<InputManager>();
@@ -156,6 +162,7 @@ public class Player : MonoBehaviour
     {
         stats.StatUpdate();
         buffManager.ApplyAllBuffs(this);
+        attackTimer -= Time.deltaTime;
     }
 
     public void InitiatePlayer(Team team, int inputID)
@@ -192,6 +199,10 @@ public class Player : MonoBehaviour
     public void GetHit(Player origen) {
         if (Team != origen.Team) {
             hp -= origen.stats.CurrentDamage;
+            Instantiate(splashPart, input.playerBody.transform.position,
+                Quaternion.Euler(0, 0,
+                    Vector2.SignedAngle(Vector2.right,
+                        origen.input.playerBody.transform.position - input.playerBody.transform.position)));
             if (hp <= 0) {
                 // die here
                 GameManager.Instance.RespawnPlayer(this);

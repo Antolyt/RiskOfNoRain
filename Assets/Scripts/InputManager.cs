@@ -26,6 +26,7 @@ public class InputManager : MonoBehaviour
 
     private Vector2 aim = Vector2.zero;
     public Transform aimView;
+    public GameObject walkDust;
 
     // Start is called before the first frame updatMOV
     void Start()
@@ -81,15 +82,36 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (inputRequester.InputAxis(EInputAxis.triggerLeft) > .1f) {
+        if (inputRequester.InputAxis(EInputAxis.triggerLeft, stats.InputID) > .1f) {
             //shoot here
-            playerBody.Attack();
-            var hit = Physics2D.Raycast(transform.position, aim, 1000f, LayerMask.GetMask("Player"));
-            if (hit) {
-                var pb = hit.transform.GetComponent<PlayerBody>();
-                if (pb) {
-                    pb.getHit(playerBody);
+            if (player.attackTimer <= 0) {
+                playerBody.Attack();
+                var rot = Quaternion.Euler(0,0, Vector2.SignedAngle(Vector2.right, aim));
+                Instantiate(player.attackPart, playerBody.transform.position, rot);
+                Instantiate(player.splashPart, playerBody.transform.position, rot);
+                
+                for(float a = -20f;a < 20f;a+=4f){
+                    var hit = Physics2D.Raycast(playerBody.transform.position + Quaternion.Euler(0,0,a)* aim, Quaternion.Euler(0,0,a)* aim, 5f, LayerMask.GetMask("Player","Environment"));
+                    if (hit) {
+                        
+                        
+                        var pb = hit.transform.GetComponent<PlayerBody>();
+                        if (pb != null) {
+                            pb.GetHit(playerBody);
+                            Debug.DrawRay(playerBody.transform.position, Quaternion.Euler(0,0,a)* aim*5f,Color.red,2f);
+                            break;
+                        }
+                        else {
+                            Debug.DrawLine(playerBody.transform.position,hit.point,Color.green,2f);
+                        }
+                   
+                    }
+
+                    Debug.DrawRay(playerBody.transform.position+ Quaternion.Euler(0,0,a)* aim, Quaternion.Euler(0,0,a)* aim * 100f,Color.white,2f);
+                   
                 }
+                player.attackTimer = player.stats.CurrentAttackSpeed;
+                    
             }
         }
 
@@ -107,6 +129,9 @@ public class InputManager : MonoBehaviour
         else
         {
             xVel = Mathf.MoveTowards(xVel, inputRequester.InputAxis(EInputAxis.movementHorizontal, stats.InputID) * speed, Time.deltaTime * 40);
+            if (Mathf.Abs(xVel) > .2) {
+                Instantiate(walkDust, playerBody.transform.position + Vector3.down * .5f, Quaternion.identity);
+            }
         }
 
         playerBody.rig.velocity = new Vector3(xVel, playerBody.rig.velocity.y);
