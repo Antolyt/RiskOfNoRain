@@ -9,7 +9,10 @@ public class Buff : ScriptableObject
     {
         Speed,
         Damage,
-        AttackSpeed, 
+        AttackSpeed,
+        OrPickup,
+        SuperPickup,
+        SwapPickup,
     }
 
     [SerializeField]
@@ -20,9 +23,28 @@ public class Buff : ScriptableObject
     float duration;
     float remainingDuration;
 
-    public void StartBuff()
+    Player player;
+
+    public void StartBuff(Player _player)
     {
         remainingDuration = duration;
+        player = _player;
+    }
+
+    public void Endbuff()
+    {
+        switch (manipulatedStat)
+        {
+            case Stat.SwapPickup:
+                player.stats.SwapPlayerID = -1;
+                break;
+            case Stat.OrPickup:
+
+                break;
+            default:
+
+                break;
+        }
     }
 
     public int BuffUpdate(float deltaTime)

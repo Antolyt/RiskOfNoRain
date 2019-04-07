@@ -8,7 +8,6 @@ public class PlayerBody : MonoBehaviour
 {
     public Animator animator;
     public Rigidbody2D rig;
-    public Transform playerSpawner;
     public ParticleSystem ps;
     public float maxDistanceToGroundForJump;
 
@@ -22,10 +21,22 @@ public class PlayerBody : MonoBehaviour
 
     public Team team;
 
+    // Indices should correspond to Team enum
+    [SerializeField]
+    GameObject[] modelPrefabs;
+    [SerializeField]
+    GameObject[] particleSystemPrefabs;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        /*
+         * int numberOfTeams = (int)Team.LastIndex;
+        if (modelPrefabs.Length != numberOfTeams || particleSystemPrefabs.Length != numberOfTeams)
+        {
+            Debug.LogError("Playerbody is missing Models for Teams");
+        }
+        */
     }
 
     public void getHit(PlayerBody origen) {
@@ -57,12 +68,6 @@ public class PlayerBody : MonoBehaviour
             animator.SetFloat("speed", Mathf.Abs(xVel));
         else
             animator.SetFloat("speed", 0);
-
-        if(transform.position.y < -10)
-        {
-            transform.position = playerSpawner.position;
-            rig.velocity = Vector3.zero;
-        }
     }
 
     public bool IsGrounded()

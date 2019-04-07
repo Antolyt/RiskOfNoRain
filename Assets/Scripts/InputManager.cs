@@ -14,16 +14,13 @@ public class InputManager : MonoBehaviour
     public Rigidbody2D rigidbody;
     public float jumpForce = 1;
     public float pullForce = 1;
+    public float swingForce = 1;
     public float friction = 1;
  
     public Hook hook;
     public PlayerBody playerBody;
-
-    [SerializeField]
-    int inputID;
-
-    [SerializeField]
-    InputRequester input;
+    
+    InputRequester inputRequester;
     Player.PlayerStats stats;
 
     private Vector2 aim = Vector2.zero;
@@ -32,6 +29,7 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame updatMOV
     void Start()
     {
+        inputRequester = InputRequester.Instance;
         stats = GetComponent<Player>().stats;
         playerBody.inputManager = this;
     }
@@ -42,7 +40,8 @@ public class InputManager : MonoBehaviour
         float speed = stats.CurrentSpeed;
 
         Vector2 old = aim;
-        aim = new Vector2(input.InputAxis(EInputAxis.viewHorizontal, inputID), -input.InputAxis(EInputAxis.viewVertical, inputID)).normalized;
+        aim = new Vector2(inputRequester.InputAxis(EInputAxis.viewHorizontal, stats.InputID), 
+            -inputRequester.InputAxis(EInputAxis.viewVertical, stats.InputID)).normalized;
         if (aim.magnitude == 0) aim = old;
         
        
@@ -62,13 +61,13 @@ public class InputManager : MonoBehaviour
             playerBody.transform.rotation = Quaternion.Euler(0,Mathf.Clamp(-rigidbody.velocity.x*30,-90,90)+90, 0);
         }
 
-        if(input.InputButtonDown(EInputButtons.RB, inputID))
+        if(inputRequester.InputButtonDown(EInputButtons.RB, stats.InputID))
         {
             if(hook.hookState == HookState.hooked)
             {
                 //playerBody.rig.velocity = new Vector3(0, 0);
-                playerBody.rig.AddForce(playerBody.rig.velocity.normalized * pullForce/2);
-                playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce/2);
+                playerBody.rig.AddForce(playerBody.rig.velocity.normalized * swingForce + Vector2.up * swingForce * 0.25f);
+                // playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
                 //playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
                 hook.hookState = HookState.returning;
             }
@@ -97,46 +96,45 @@ public class InputManager : MonoBehaviour
 
         if(!playerBody.IsGrounded())
         {
-            /*
-            if (xVel > speed)
-            {
-                xVel -= friction * Time.deltaTime;
-            }
-            else if (xVel < -speed)
-            {
-                xVel += friction * Time.deltaTime;
-            }*/
             float prev = xVel;
-            xVel = Mathf.MoveTowards(xVel, input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed, Time.deltaTime*20);
+            xVel = Mathf.MoveTowards(xVel, inputRequester.InputAxis(EInputAxis.movementHorizontal, stats.InputID) * speed, Time.deltaTime*20);
             if (hook.hookState == HookState.hooked && Mathf.Abs(xVel) < Mathf.Abs(prev)) {
                 xVel = prev;
             }
-            // xVel += input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed * Time.fixedDeltaTime;
         }
         else
         {
-            xVel = Mathf.MoveTowards(xVel, input.InputAxis(EInputAxis.movementHorizontal, inputID) * speed, Time.deltaTime * 40);
+            xVel = Mathf.MoveTowards(xVel, inputRequester.InputAxis(EInputAxis.movementHorizontal, stats.InputID) * speed, Time.deltaTime * 40);
         }
 
         playerBody.rig.velocity = new Vector3(xVel, playerBody.rig.velocity.y);
 
-        if(input.InputButtonDown(EInputButtons.LB, inputID))
+        if(inputRequester.InputButtonDown(EInputButtons.LB, stats.InputID))
         {
             if(hook.hookState == HookState.hooked)
             {
-                hook.ReturnHook();
+                hook.PullToHook();
+
+                playerBody.rig.AddForce(Vector3.up * jumpForce * 0.5f);
+                // playerBody.rig.AddForce(playerBody.rig.velocity.normalized * pullForce);
+                playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
+                //playerBody.rig.AddForce((hook.transform.position - playerBody.rig.transform.position).normalized * pullForce);
+                hook.hookState = HookState.returning;
             }
 
             if (hook.hookState == HookState.stored)
             {
                 hook.ShootHook(aim.normalized);
-                // hook.ShootHook((new Vector3(Input.GetAxis("move_x_" + inputID), Input.GetAxis("move_x_" + inputID))).normalized);
             }
+        }
+
+        if (playerBody.transform.position.y < -25)
+        {
+            GameManager.Instance.RespawnPlayer(this.GetComponent<Player>());
         }
     }
 
     private void LateUpdate() {
         aimView.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, aim));
-        
     }
 }

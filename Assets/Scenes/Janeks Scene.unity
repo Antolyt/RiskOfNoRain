@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465794, g: 0.49641502, b: 0.57481563, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465794, g: 0.49641526, b: 0.5748156, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13507,6 +13507,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7504595616775964432, guid: 9959527447f44d04da1b21bbaae030ab,
+        type: 3}
+      propertyPath: dualInput
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3895884817657276302, guid: 9959527447f44d04da1b21bbaae030ab,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13596,11 +13601,6 @@ PrefabInstance:
         type: 3}
       propertyPath: pickupSpawnTime
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7504595616775964432, guid: 9959527447f44d04da1b21bbaae030ab,
-        type: 3}
-      propertyPath: dualInput
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9959527447f44d04da1b21bbaae030ab, type: 3}
@@ -16882,11 +16882,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6936743975308642903, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
-        type: 3}
-      propertyPath: m_Distance
-      value: 0.049999952
-      objectReference: {fileID: 0}
     - target: {fileID: 9161077923382215725, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
         type: 3}
       propertyPath: m_Name
@@ -16957,10 +16952,20 @@ PrefabInstance:
       propertyPath: inputID
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9161077923382215724, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
+        type: 3}
+      propertyPath: inputRequester
+      value: 
+      objectReference: {fileID: 1225124820}
     - target: {fileID: 1236854068, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab, type: 3}
       propertyPath: playerSpawner
       value: 
       objectReference: {fileID: 2144162570}
+    - target: {fileID: 6936743975308642903, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
+        type: 3}
+      propertyPath: m_Distance
+      value: 0.049999952
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab, type: 3}
 --- !u!1001 &1540662241
@@ -24076,11 +24081,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6936743975308642903, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
-        type: 3}
-      propertyPath: m_Distance
-      value: 0.049999952
-      objectReference: {fileID: 0}
     - target: {fileID: 9161077923382215725, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
         type: 3}
       propertyPath: m_Name
@@ -24146,9 +24146,19 @@ PrefabInstance:
       propertyPath: input
       value: 
       objectReference: {fileID: 1225124820}
+    - target: {fileID: 9161077923382215724, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
+        type: 3}
+      propertyPath: inputRequester
+      value: 
+      objectReference: {fileID: 1225124820}
     - target: {fileID: 1236854068, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab, type: 3}
       propertyPath: playerSpawner
       value: 
       objectReference: {fileID: 2144162570}
+    - target: {fileID: 6936743975308642903, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab,
+        type: 3}
+      propertyPath: m_Distance
+      value: 0.049999952
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cd0f860b09a66c4d8c637e33ab0e3ab, type: 3}

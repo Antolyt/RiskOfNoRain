@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 443d68f2ec1bc5a438149b1192c06b50, type: 3}
   m_Name: SuperBuff
   m_EditorClassIdentifier: 
-  manipulatedStat: 0
-  modifierAmount: 0.1
+  manipulatedStat: 4
+  modifierAmount: 0
   duration: 30
