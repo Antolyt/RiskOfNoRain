@@ -77,7 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnLocations: {fileID: 4458557406979511145}
   burnableObjects: {fileID: 4458557405792363328}
-  prefabs: []
+  prefabs:
+  - {fileID: 4635036475577971739, guid: 499eaead87da6244abceca55b4e24971, type: 3}
   mm: {fileID: 0}
 --- !u!1 &4458557406979511144
 GameObject:
