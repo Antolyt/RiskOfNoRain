@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Burnable : MonoBehaviour
 {
-    public int maxHealth;
-    float health;
-    float burning = 0;
-    public float maxBurning;
+    public float maxHealth;
+    public float health;
+    //float burning = 0;
+    //public float maxBurning;
     public MeshRenderer mr;
     public Material m;
     Color startColor;
@@ -27,28 +27,25 @@ public class Burnable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        health -= burning * Time.deltaTime;
+        //health -= burning * Time.deltaTime;
         float r = health / maxHealth;
         mr.material.color = Color.Lerp(Color.black, startColor, r);
 
-        if(health <= 0)
-        {
-            Destroy(this.gameObject);
-        }
+        //if(health <= 0)
+        //{
+        //    Destroy(this.gameObject);
+        //}
     }
 
-    public void InflictBurn(int strength)
+    public void InflictBurn(float strength)
     {
-        burning = Mathf.Min(burning + strength, maxBurning);
+        //burning = Mathf.Min(burning + strength, maxBurning);
+        health = Mathf.Max(0, health - strength);
     }
 
-    public void RemoveBurn()
+    public void RemoveBurn(float strength)
     {
-        burning = 0;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        InflictBurn(10);
+        //burning = 0;
+        health = Mathf.Min(maxHealth, health + strength);
     }
 }

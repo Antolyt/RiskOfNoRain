@@ -109,7 +109,31 @@ public class InputManager : MonoBehaviour
                     }
 
                     Debug.DrawRay(playerBody.transform.position+ Quaternion.Euler(0,0,a)* aim, Quaternion.Euler(0,0,a)* aim * 100f,Color.white,2f);
-                   
+
+                    // check if hitting burnable object
+                    var burnableHit = Physics2D.Raycast(playerBody.transform.position + Quaternion.Euler(0, 0, a) * aim, Quaternion.Euler(0, 0, a) * aim, 5f, LayerMask.GetMask("Player", "Burnable"));
+                    if (burnableHit)
+                    {
+                        Burnable b = burnableHit.transform.GetComponent<Burnable>();
+                        Debug.Log(burnableHit.transform.gameObject.name);
+                        if (b != null)
+                        {
+                            switch (player.Team)
+                            {
+                                case Team.Sand:
+                                    b.RemoveBurn(1);
+                                    break;
+                                case Team.Fire:
+                                    b.InflictBurn(1);
+                                    break;
+                                case Team.LastIndex:
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                    }
                 }
                 player.attackTimer = player.stats.CurrentAttackSpeed;
                     
