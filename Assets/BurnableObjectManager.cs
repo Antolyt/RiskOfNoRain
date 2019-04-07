@@ -12,12 +12,13 @@ public class BurnableObjectManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (var item in spawnLocations.GetComponentsInChildren<Transform>())
+        Transform[] loc = spawnLocations.GetComponentsInChildren<Transform>();
+        for (int a = 1; a < loc.Length; a++)
         {
             int i = Random.Range(0, prefabs.Count);
             GameObject go = Instantiate(prefabs[i]);
             go.transform.SetParent(burnableObjects);
-            go.transform.position = item.position;
+            go.transform.position = loc[a].position;
         }
     }
 
