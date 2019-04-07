@@ -458,6 +458,8 @@ MonoBehaviour:
   attackTimer: 0
   attackPart: {fileID: 5571739760825006699, guid: cf98326033659ab40bf5d4035a6d55cf,
     type: 3}
+  attackPart2: {fileID: 2999733591102520128, guid: c0ba2ada10001e345917bc3022a9c30a,
+    type: 3}
   splashPart: {fileID: 8885265204770710271, guid: 644435a9d610aab4f98aa3dd417e0aeb,
     type: 3}
 --- !u!1001 &4827306597810580568

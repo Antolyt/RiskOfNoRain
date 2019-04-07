@@ -146,6 +146,7 @@ public class Player : MonoBehaviour
     public float attackTimer = 0;
 
     public GameObject attackPart;
+    public GameObject attackPart2;
     public GameObject splashPart;
     
     private void Awake()

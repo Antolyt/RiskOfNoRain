@@ -87,7 +87,7 @@ public class InputManager : MonoBehaviour
             if (player.attackTimer <= 0) {
                 playerBody.Attack();
                 var rot = Quaternion.Euler(0,0, Vector2.SignedAngle(Vector2.right, aim));
-                Instantiate(player.attackPart, playerBody.transform.position, rot);
+                Instantiate(player.Team == Team.Sand?player.attackPart:player.attackPart2, playerBody.transform.position, rot);
                 Instantiate(player.splashPart, playerBody.transform.position, rot);
                 
                 for(float a = -20f;a < 20f;a+=4f){
