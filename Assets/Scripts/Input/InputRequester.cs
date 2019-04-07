@@ -31,7 +31,7 @@ public enum EInputVector
 
 public class InputRequester : MonoBehaviour {
 
-    int MAX_PLAYER_ID = 8;
+    int MAX_PLAYER_ID = 16;
     public bool dualInput = true;
 
     public static InputRequester Instance;

@@ -36,8 +36,20 @@ public class GameManager : MonoBehaviour
 
     void InitiateGame()
     {
-        SpawnNewPlayer(Team.Sand);
-        SpawnNewPlayer(Team.Fire);
+        if (ConnectedController.Instance != null)
+        {
+            List<JoinScreen.ControllerData> controllerData = ConnectedController.Instance.controllerData;
+
+            foreach (JoinScreen.ControllerData data in ConnectedController.Instance.controllerData)
+            {
+                SpawnNewPlayer(data.Team, data.InputIndex);
+            }
+        }
+        else
+        {
+            SpawnNewPlayer(Team.Sand);
+            SpawnNewPlayer(Team.Fire);
+        }
     }
 
     // Update is called once per frame
@@ -53,9 +65,14 @@ public class GameManager : MonoBehaviour
 
     void SpawnNewPlayer(Team team)
     {
+        SpawnNewPlayer(team, players.Count);
+    }
+
+    void SpawnNewPlayer(Team team, int inputID)
+    {
         Player player = Instantiate(playerPrefab, GetRandomSpawnPosition(), Quaternion.identity);
 
-        player.InitiatePlayer(team, players.Count);
+        player.InitiatePlayer(team, inputID);
 
         players.Add(player);
     }

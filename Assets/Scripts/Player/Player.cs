@@ -35,6 +35,12 @@ public class Player : MonoBehaviour
                     }
                     InputID = SwapPlayerID;
                     break;
+                case Buff.Stat.SuperPickup:
+                    IsSuperWeaponActive = true;
+                    break;
+                case Buff.Stat.OrPickup:
+
+                    break;
                 default:
                     Debug.LogWarning("Case " + buff.ManipulatedStat.ToString() + " is not implemented yet");
                     break;
@@ -60,6 +66,7 @@ public class Player : MonoBehaviour
             CurrentDamage = damage;
             CurrentAttackSpeed = attackSpeed;
             InputID = ActualInputID;
+            IsSuperWeaponActive = false;
         }
 
         void Update()
@@ -80,6 +87,8 @@ public class Player : MonoBehaviour
         public int ActualInputID { get; set; }
 
         public bool IsSwapActive { get => SwapPlayerID >= 0; }
+
+        public bool IsSuperWeaponActive { get; private set; }
     }
 
     public class BuffManager
