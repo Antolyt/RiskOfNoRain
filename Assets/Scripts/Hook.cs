@@ -20,6 +20,11 @@ public class Hook : MonoBehaviour
     public MeshRenderer meshRenderer;
     public DistanceJoint2D joint;
 
+    public AudioSource audioSource;
+    public AudioClip shootSound;
+    public AudioClip hitSound;
+    public AudioClip returnSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,7 +76,12 @@ public class Hook : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (hookState == HookState.fired && other.gameObject.layer == LayerMask.NameToLayer("Environment"))
+        {
             hookState = HookState.hooked;
+
+            audioSource.clip = hitSound;
+            audioSource.Play();
+        }
         if(hookState == HookState.returning && other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             StoreHook();
@@ -86,6 +96,9 @@ public class Hook : MonoBehaviour
             this.direction = direction;
             meshRenderer.enabled = true;
             hookState = HookState.fired;
+
+            audioSource.clip = shootSound;
+            audioSource.Play();
         }
     }
 
@@ -98,5 +111,8 @@ public class Hook : MonoBehaviour
     public void ReturnHook()
     {
         hookState = HookState.returning;
+
+        audioSource.clip = returnSound;
+        audioSource.Play();
     }
 }
