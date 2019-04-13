@@ -54,12 +54,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     Vector3 GetRandomSpawnPosition()
     {
         return transform.position + Vector3.up + Vector3.right * Random.Range(-8, 8);

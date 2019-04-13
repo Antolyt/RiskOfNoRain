@@ -33,7 +33,7 @@ public class Buff : ScriptableObject
 
     public void Endbuff()
     {
-        Debug.Log("Removing Buff of type: " + manipulatedStat.ToString());
+        Debug.Log("Removing Buff of type: " + manipulatedStat.ToString() + " from player " + player.stats.ActualInputID);
         switch (manipulatedStat)
         {
             case Stat.SwapPickup:

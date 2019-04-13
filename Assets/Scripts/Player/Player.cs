@@ -36,10 +36,6 @@ public class Player : MonoBehaviour
                     CurrentAttackSpeed += buff.ModifierAmount;
                     break;
                 case Buff.Stat.SwapPickup:
-                    if(player.stats.SwapPlayerID < 0)
-                    {
-                        player.InitiateSwap(buff);
-                    }
                     InputID = SwapPlayerID;
                     break;
                 case Buff.Stat.SuperPickup:
@@ -52,11 +48,6 @@ public class Player : MonoBehaviour
                     Debug.LogWarning("Case " + buff.ManipulatedStat.ToString() + " is not implemented yet");
                     break;
             }
-        }
-
-        public void InitiateSwap()
-        {
-            
         }
 
         /// <summary>
@@ -117,11 +108,46 @@ public class Player : MonoBehaviour
             player = _player;
         }
 
-        public void AddBuff(Buff buff)
+        public void ActivateBuff(Buff buff)
         {
             Buff newBuff = Instantiate(buff);
-            activeBuffs.Add(newBuff);
-            newBuff.StartBuff(player);
+
+            switch (buff.ManipulatedStat)
+            {
+                case Buff.Stat.SwapPickup:
+                    if (player.stats.SwapPlayerID < 0)
+                    {
+                        List<Player> possipleSwaps = GameManager.Instance.Players
+                            .Where(p => p.Team != player.Team && p.stats.IsSwapActive == false).ToList();
+
+                        if (possipleSwaps != null && possipleSwaps.Count > 0)
+                        {
+                            AddBuff(newBuff);
+
+                            Player otherPlayer = possipleSwaps[Random.Range(0, possipleSwaps.Count)];
+
+                            Debug.Log("player " + player.stats.ActualInputID + " picked up swap");
+
+                            player.stats.SwapPlayerID = otherPlayer.stats.InputID;
+                            otherPlayer.buffManager.AddBuff(Instantiate(buff));
+                            otherPlayer.stats.SwapPlayerID = player.stats.InputID;
+                        }
+                        else
+                        {
+                            Debug.LogWarning("player " + player.stats.ActualInputID + " cannot Swap right now");
+                        }
+                    }
+                    break;
+                default:
+                    AddBuff(newBuff);
+                    break;
+            }
+        }
+
+        public void AddBuff(Buff buff)
+        {
+            activeBuffs.Add(buff);
+            buff.StartBuff(player);
         }
 
         public void ApplyAllBuffs(Player player)
@@ -200,13 +226,15 @@ public class Player : MonoBehaviour
         {
             Player otherPlayer = possipleSwaps[Random.Range(0, possipleSwaps.Count)];
 
+            Debug.Log("player " + stats.ActualInputID + " picked up swap");
+
             stats.SwapPlayerID = otherPlayer.stats.InputID;
-            otherPlayer.buffManager.AddBuff(Instantiate(buff));
+            otherPlayer.buffManager.ActivateBuff(Instantiate(buff));
             otherPlayer.stats.SwapPlayerID = stats.InputID;
         }
         else 
         {
-            Debug.LogWarning("Cannot Swap right now");
+            Debug.LogWarning("player " + stats.ActualInputID + " cannot Swap right now");
         }
     }
 

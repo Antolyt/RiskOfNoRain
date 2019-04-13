@@ -23,8 +23,8 @@ public class Pickup : MonoBehaviour
 
         if (buffManager != null)
         {
-            Debug.Log("Added Buff to player");
-            buffManager.AddBuff(buff);
+            Debug.Log("Added Buff(" + buff.ManipulatedStat.ToString() + ") to player " + collision.GetComponentInParent<Player>().stats.ActualInputID);
+            buffManager.ActivateBuff(buff);
         }
 
         Destroy(gameObject);
