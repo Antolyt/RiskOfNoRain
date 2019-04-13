@@ -1,19 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(InputCreator))]
-public class InputManagerCreator : Editor
+namespace ControllerInputCreator
 {
-
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(InputCreator))]
+    public class InputCreatorManager : Editor
     {
-        base.OnInspectorGUI();
 
-        if (GUILayout.Button("Update"))
+        public override void OnInspectorGUI()
         {
-            (target as InputCreator).Init();
+            base.OnInspectorGUI();
+
+            if (GUILayout.Button("Update"))
+            {
+                (target as InputCreator).Init();
+            }
         }
     }
 }

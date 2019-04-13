@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum EInputButtons {
     A,
@@ -32,7 +30,11 @@ public enum EInputVector
 public class InputRequester : MonoBehaviour {
 
     int MAX_PLAYER_ID = 16;
-    public bool dualInput = true;
+
+    [SerializeField]
+    bool dualInput = true;
+    [SerializeField]
+    bool allowKeyboardInput = true;
 
     public static InputRequester Instance;
 
@@ -41,6 +43,45 @@ public class InputRequester : MonoBehaviour {
         Instance = this;
     }
 
+    /// <summary>
+    /// signals if button is pressed
+    /// </summary>
+    /// <param name="button">enum of the button</param>
+    /// <param name="playerID">Id of the player</param>
+    /// <returns>boolean that signals if button is currently pressed</returns>
+    public bool InputButton(EInputButtons button, int playerID = -1)
+    {
+        string playerString = getPlayerString(playerID);
+
+        switch (button)
+        {
+            case EInputButtons.A:
+                return Input.GetButton("a" + playerString);
+            case EInputButtons.B:
+                return Input.GetButton("b" + playerString);
+            case EInputButtons.X:
+                return Input.GetButton("x" + playerString);
+            case EInputButtons.Y:
+                return Input.GetButton("y" + playerString);
+            case EInputButtons.LB:
+                return Input.GetButton("left_bumper" + playerString);
+            case EInputButtons.RB:
+                return Input.GetButton("right_bumper" + playerString);
+            case EInputButtons.Back:
+                return Input.GetButton("back" + playerString);
+            case EInputButtons.Start:
+                return Input.GetButton("start" + playerString);
+            default:
+                return false;
+        }
+    }
+
+    /// <summary>
+    /// signals if was just pressed (during the last update)
+    /// </summary>
+    /// <param name="button">enum of the button</param>
+    /// <param name="playerID">Id of the player</param>
+    /// <returns>boolean that signals if button was just pressed</returns>
     public bool InputButtonDown(EInputButtons button, int playerID = -1)
     {
         string playerString = getPlayerString(playerID);
@@ -66,38 +107,39 @@ public class InputRequester : MonoBehaviour {
                 return false;
         }
     }
-    
+
     /// <summary>
-    /// signals if button is pressed
+    /// signals if button was just released (during the last update)
     /// </summary>
     /// <param name="button">enum of the button</param>
     /// <param name="playerID">Id of the player</param>
-    /// <returns>boolean that signals if button is currently pressed</returns>
-    public bool InputButton(EInputButtons button, int playerID = -1)
+    /// <returns>boolean that signals if button was just released</returns>
+    public bool InputButtonUp(EInputButtons button, int playerID = -1)
     {
         string playerString = getPlayerString(playerID);
         switch (button)
         {
             case EInputButtons.A:
-                return Input.GetButton("a" + playerString);
+                return Input.GetButtonUp("a" + playerString);
             case EInputButtons.B:
-                return Input.GetButton("b" + playerString);
+                return Input.GetButtonUp("b" + playerString);
             case EInputButtons.X:
-                return Input.GetButton("x" + playerString);
+                return Input.GetButtonUp("x" + playerString);
             case EInputButtons.Y:
-                return Input.GetButton("y" + playerString);
+                return Input.GetButtonUp("y" + playerString);
             case EInputButtons.LB:
-                return Input.GetButton("left_bumper" + playerString);
+                return Input.GetButtonUp("left_bumper" + playerString);
             case EInputButtons.RB:
-                return Input.GetButton("right_bumper" + playerString);
+                return Input.GetButtonUp("right_bumper" + playerString);
             case EInputButtons.Back:
-                return Input.GetButton("back" + playerString);
+                return Input.GetButtonUp("back" + playerString);
             case EInputButtons.Start:
-                return Input.GetButton("start" + playerString);
+                return Input.GetButtonUp("start" + playerString);
             default:
                 return false;
         }
     }
+
 
     // fix AxisInput for KeyboardPlayers
 
@@ -128,10 +170,10 @@ public class InputRequester : MonoBehaviour {
                 inputValue = Input.GetAxis("view_y" + playerString);
                 break;
             case EInputAxis.triggerLeft:
-                inputValue = Input.GetAxis("left_button" + playerString);
+                inputValue = Input.GetAxis("left_trigger" + playerString);
                 break;
             case EInputAxis.triggerRight:
-                inputValue = Input.GetAxis("right_button" + playerString);
+                inputValue = Input.GetAxis("right_trigger" + playerString);
                 break;
         }
         return inputValue;
@@ -148,9 +190,11 @@ public class InputRequester : MonoBehaviour {
         switch(vector)
         {
             case EInputVector.movement:
-                return new Vector2(InputAxis(EInputAxis.movementHorizontal, playerID), InputAxis(EInputAxis.movementVertical, playerID));
+                return new Vector2(InputAxis(EInputAxis.movementHorizontal, playerID), 
+                    InputAxis(EInputAxis.movementVertical, playerID));
             case EInputVector.view:
-                return new Vector2(InputAxis(EInputAxis.viewHorizontal, playerID), InputAxis(EInputAxis.viewVertical, playerID));
+                return new Vector2(InputAxis(EInputAxis.viewHorizontal, playerID), 
+                    InputAxis(EInputAxis.viewVertical, playerID));
             default:
                 Debug.LogError("Fatal Error in " + this.name + ". THIS SHOULD NOT HAPPEN");
                 return Vector2.zero;

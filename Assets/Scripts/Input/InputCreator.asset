@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e709ef7d4d39d49a967d52fb2e1cdb, type: 3}
   m_Name: InputCreator
   m_EditorClassIdentifier: 
-  _numJoysticks: 16
-  _ignoreCount: 0
+  _numJoysticks: 8
+  _ignoreCount: 20
   _axisGravity: 0
   _axisDead: 0.19
   _axisSensitivity: 1
@@ -23,8 +23,8 @@ MonoBehaviour:
   _moveAxisYName: move_y
   _viewAxisXName: view_x
   _viewAxisYName: view_y
-  _leftTriggerName: left_button
-  _rightTriggerName: right_button
+  _leftTriggerName: left_trigger
+  _rightTriggerName: right_trigger
   _buttonAxisGravity: 1000
   _buttonAxisDead: 0.001
   _buttonAxisSensitivity: 1000
@@ -33,27 +33,47 @@ MonoBehaviour:
   - b
   - x
   - y
-  - left_bumper
-  - right_bumper
+  - left_button
+  - right_button
+  - back
+  - start
+  - left_stick
+  - right_stick
   _p0KeyboardButtons:
-  - W
-  - Q
-  - E
-  - A
-  - S
-  - D
-  _p0KeyHorizontalPos: 
-  _p0KeyHorizontalNeg: 
-  _p0KeyVerticalPos: 
-  _p0KeyVerticalNeg: 
+  - space
+  - left ctrl
+  - q
+  - e
+  - u
+  - o
+  - r
+  - y
+  - f
+  - h
+  _p0KeyMoveHorizontalPos: d
+  _p0KeyMoveHorizontalNeg: a
+  _p0KeyMoveVerticalPos: w
+  _p0KeyMoveVerticalNeg: s
+  _p0KeyViewHorizontalPos: l
+  _p0KeyViewHorizontalNeg: j
+  _p0KeyViewVerticalPos: k
+  _p0KeyViewVerticalNeg: i
   _p1KeyboardButtons:
-  - I
-  - O
-  - P
-  - K
-  - L
-  - "\xD6"
-  _p1KeyHorizontalPos: 
-  _p1KeyHorizontalNeg: 
-  _p1KeyVerticalPos: 
-  _p1KeyVerticalNeg: 
+  - '[7]'
+  - '[9]'
+  - '[1]'
+  - '[3]'
+  - '[0]'
+  - '[right ctrl]'
+  - '[plus]'
+  - '[enter]'
+  - '[*]'
+  - '[2]'
+  _p1KeyMoveHorizontalPos: right
+  _p1KeyMoveHorizontalNeg: left
+  _p1KeyMoveVerticalPos: up
+  _p1KeyMoveVerticalNeg: down
+  _p1KeyViewHorizontalPos: '[6]'
+  _p1KeyViewHorizontalNeg: '[4]'
+  _p1KeyViewVerticalPos: '[5]'
+  _p1KeyViewVerticalNeg: '[8]'
